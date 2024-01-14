@@ -6,13 +6,13 @@ import ShotitzLogo from "../../public/brand/logo.jpeg";
 
 const LoadingPage = () => {
   return (
-    <div className="page-not-found w-full min-h-[100dvh] flex justify-center items-center">
+    <div className="fixed top-0 left-0 right-0 w-full min-h-[100dvh] flex justify-center items-center">
       <div className="animate-pulse">
         <Image
           src={ShotitzLogo}
           priority={true}
           alt="scanr logo"
-          className="w-[120px] object-cover -ml-6"
+          className="w-[200px] object-cover -ml-6"
         />
       </div>
     </div>
