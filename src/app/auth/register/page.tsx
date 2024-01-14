@@ -54,7 +54,7 @@ const RegisterPage = () => {
             />
           </div>
           <div>
-            <Link href="/register" className="text-primary float-right">
+            <Link href="/auth/forgot" className="text-primary float-right">
               Forgot password?
             </Link>
           </div>
@@ -62,9 +62,12 @@ const RegisterPage = () => {
             <button className="w-full min-h-12 bg-primary rounded-md mt-3">
               Create an account
             </button>
-            <button className="w-full min-h-12 border border-primary text-primary rounded-md mt-3">
+            <Link
+              href="/auth/login"
+              className="w-full min-h-12 border border-primary text-primary rounded-md mt-3 flex justify-center items-center"
+            >
               Login
-            </button>
+            </Link>
           </div>
         </form>
       </div>

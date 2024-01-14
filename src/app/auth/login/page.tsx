@@ -33,7 +33,7 @@ const LoginPage = () => {
             />
           </div>
           <div>
-            <Link href="auth/register" className="text-primary float-right">
+            <Link href="/auth/forgot" className="text-primary float-right">
               Forgot password?
             </Link>
           </div>
@@ -41,9 +41,12 @@ const LoginPage = () => {
             <button className="w-full min-h-12 bg-primary rounded-md mt-3">
               Login
             </button>
-            <button className="w-full min-h-12 border border-primary text-primary rounded-md mt-3">
+            <Link
+              href="/auth/register"
+              className="w-full min-h-12 border border-primary text-primary rounded-md mt-3 flex justify-center items-center"
+            >
               Create an account
-            </button>
+            </Link>
           </div>
         </form>
       </div>
