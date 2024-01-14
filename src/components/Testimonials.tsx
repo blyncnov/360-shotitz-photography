@@ -1,10 +1,44 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 
 // Components
 import WhiteSpace from "@/components/WhiteSpace";
 
+interface ITestimonial {
+  id: number;
+  image: string;
+  testimony: string;
+  name: string;
+}
+
+const Clients_Testimonial: ITestimonial[] = [
+  {
+    id: 1,
+    image: "Are you available to travel?",
+    testimony:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, tempore explicabo eaque sequi repellat id! A iste explicabo consequatur praesentium.",
+    name: "Taiwo Jeremy",
+  },
+  {
+    id: 2,
+    image: "What is your style?",
+    testimony:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, tempore explicabo eaque sequi repellat id! A iste explicabo consequatur praesentium.",
+    name: "Chibuke Victoria",
+  },
+  {
+    id: 3,
+    image: "How do i book?",
+    testimony:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, tempore explicabo eaque sequi repellat id! A iste explicabo consequatur praesentium.",
+    name: "Antonio Maize",
+  },
+];
+
 const Testimonials = () => {
+  const [testimonyIndex, setTestimonyIndex] = useState(0);
   return (
     <div className="py-12">
       <WhiteSpace>
@@ -48,28 +82,35 @@ const Testimonials = () => {
                 <path d="M9.563 8.469l-0.813-1.25c-5.625 3.781-8.75 8.375-8.75 12.156 0 3.656 2.688 5.375 4.969 5.375 2.875 0 4.906-2.438 4.906-5 0-2.156-1.375-4-3.219-4.688-0.531-0.188-1.031-0.344-1.031-1.25 0-1.156 0.844-2.875 3.938-5.344zM21.969 8.469l-0.813-1.25c-5.563 3.781-8.75 8.375-8.75 12.156 0 3.656 2.75 5.375 5.031 5.375 2.906 0 4.969-2.438 4.969-5 0-2.156-1.406-4-3.313-4.688-0.531-0.188-1-0.344-1-1.25 0-1.156 0.875-2.875 3.875-5.344z"></path>
               </svg>
               <p className="text-lg mt-12">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatibus, fuga! Laudantium velit eos cumque nam. Distinctio
-                architecto quaerat laudantium unde aspernatur eaque fugiat
-                deleniti eos sit, consequatur officiis ea ex tempore quae
-                accusantium minima.
+                {Clients_Testimonial[testimonyIndex].testimony}
               </p>
               <div className="w-full flex justify-between gap-4 items-center mt-6">
-                <h2 className="text-2xl">Bedlam</h2>
-                <div>
+                <h2 className="text-2xl">
+                  {Clients_Testimonial[testimonyIndex].name}
+                </h2>
+                <div
+                  onClick={() => {
+                    if (testimonyIndex < Clients_Testimonial.length - 1) {
+                      return setTestimonyIndex(testimonyIndex + 1);
+                    } else {
+                      setTestimonyIndex(0);
+                    }
+                  }}
+                >
                   <svg
                     width="50px"
                     height="50px"
                     viewBox="0 0 24 24"
+                    className="cursor-pointer"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M4 12H20M20 12L16 8M20 12L16 16"
                       stroke="#fff"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </div>
