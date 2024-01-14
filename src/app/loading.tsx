@@ -6,7 +6,7 @@ import ShotitzLogo from "../../public/brand/logo.jpeg";
 
 const LoadingPage = () => {
   return (
-    <div className="fixed top-0 left-0 right-0 w-full min-h-[100dvh] flex justify-center items-center">
+    <div className="fixed top-0 left-0 right-0 w-full bg-black min-h-[100dvh] flex justify-center items-center">
       <div className="animate-pulse">
         <Image
           src={ShotitzLogo}
