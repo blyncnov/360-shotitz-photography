@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rozha+One&display=swap');
+
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
@@ -50,6 +52,8 @@ html {
   scroll-timeline: inherit;
   scroll-behavior: smooth;
   font-size: 16px !important;
+
+  font-family: 'Rozha One', serif;
 
   color: var(--white);
   background-color: var(--black);
