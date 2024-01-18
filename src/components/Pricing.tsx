@@ -30,7 +30,7 @@ const Pricing = () => {
               you with the best service per each plan
             </p>
           </div>
-          <div className="w-full max-w-4xl mx-auto grid gap-x-12 gap-y-6 md:grid-cols-3 grid-cols-1 justify-center items-center">
+          <div className="w-full md:max-w-4xl max-w-3xl mx-auto grid gap-x-12 gap-y-6 md:grid-cols-3 grid-cols-1 justify-center items-center">
             <PricingCard />
             <PricingCard />
             <PricingCard />

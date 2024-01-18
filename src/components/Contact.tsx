@@ -42,7 +42,7 @@ const ContactUsComponent = () => {
                     </h1>
                   </div>
                   <form className="w-full flex flex-col">
-                    <div className="w-full grid grid-cols-2 gap-4 py-4">
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
                       <div>
                         <label htmlFor="email_address">First Name</label>
                         <input

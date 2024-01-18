@@ -52,6 +52,7 @@ export default function NavBar() {
                       <li key={data.id}>
                         <Link
                           href={`${data.url}`}
+                          onClick={handleIsClicked}
                           className="relative hover:text-primary transition-all font-normal text-lg flex items-center flex-3"
                         >
                           {data.title}
