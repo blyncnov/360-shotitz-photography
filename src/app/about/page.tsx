@@ -2,17 +2,21 @@ import React from "react";
 
 // Components
 import Pricing from "@/components/Pricing";
+import FrequentlyAskedQuestions from "@/components/FAQ";
 import Testimonials from "@/components/Testimonials";
-import ContactUsComponent from "@/components/Contact";
+import AboutUs from "@/components/About";
+import OurTeam from "@/components/OurTeam";
 
-const ContactUs = () => {
+const About = () => {
   return (
     <main className="w-full flex flex-col gap-12">
-      <ContactUsComponent />
+      <AboutUs />
       <Testimonials />
+      <OurTeam />
       <Pricing />
+      <FrequentlyAskedQuestions />
     </main>
   );
 };
 
-export default ContactUs;
+export default About;

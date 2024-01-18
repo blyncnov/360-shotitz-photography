@@ -19,7 +19,7 @@ const RegisterPage = () => {
               id="full_name"
               name="full_name"
               placeholder="Enter your Full Name"
-              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2"
+              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
             />
           </div>
           <div>
@@ -29,7 +29,7 @@ const RegisterPage = () => {
               id="email_address"
               name="email_address"
               placeholder="Enter your email address"
-              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2"
+              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
             />
           </div>
 
@@ -40,7 +40,7 @@ const RegisterPage = () => {
               id="password"
               name="password"
               placeholder="Password"
-              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2"
+              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
             />
           </div>
           <div>
@@ -50,7 +50,7 @@ const RegisterPage = () => {
               id="confirm_password"
               name="confirm_password"
               placeholder="Confirm password"
-              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2"
+              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
             />
           </div>
           <div>

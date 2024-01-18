@@ -19,7 +19,7 @@ const LoginPage = () => {
               id="email_address"
               name="email_address"
               placeholder="Enter your email address"
-              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2"
+              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
             />
           </div>
           <div>
@@ -29,7 +29,7 @@ const LoginPage = () => {
               id="password"
               name="password"
               placeholder="Password"
-              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2"
+              className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
             />
           </div>
           <div>
