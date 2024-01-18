@@ -34,7 +34,7 @@ const CTX: ICtx[] = [
 const PhotographCTX = () => {
   return (
     <div
-      className="py-12"
+      className="md:py-12"
       style={{
         background: `url(${Wavy_pattern.src}) 100px no-repeat`,
         backgroundPosition: "left top",

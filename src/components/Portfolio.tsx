@@ -6,7 +6,7 @@ import WhiteSpace from "@/components/WhiteSpace";
 
 const Portfolio = () => {
   return (
-    <div className="py-12">
+    <div className="md:py-12">
       <WhiteSpace>
         <div className="w-full flex flex-col gap-12">
           <div className="w-full text-center flex flex-col gap-4 max-w-3xl mx-auto">

@@ -9,7 +9,7 @@ import Wavy_pattern from "../../public/wavy_pattern.png";
 const Pricing = () => {
   return (
     <div
-      className="py-12"
+      className="md:py-12"
       style={{
         background: `url(${Wavy_pattern.src}) 100px no-repeat, url(${Wavy_pattern.src}) 100px no-repeat`,
         backgroundPosition: "left top, bottom right",

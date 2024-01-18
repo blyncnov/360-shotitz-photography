@@ -11,7 +11,7 @@ import Wavy_pattern from "../../public/wheel_pattern.png";
 const ContactUsComponent = () => {
   return (
     <div
-      className="py-12"
+      className="md:py-12"
       style={{
         background: `url(${Wavy_pattern.src}) 100px no-repeat`,
         backgroundPosition: "bottom left",

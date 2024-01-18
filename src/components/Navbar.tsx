@@ -51,7 +51,6 @@ export default function NavBar() {
                       <li key={data.id}>
                         <Link
                           href={`${data.url}`}
-                          onClick={handleIsClicked}
                           className="relative hover:text-primary transition-all font-normal text-lg flex items-center flex-3"
                         >
                           {data.title}
@@ -93,7 +92,11 @@ export default function NavBar() {
               </div>
             </div>
             {/* HANDLE MOBILE NAVIGATION */}
-            <div>{isClicked && <MobileNavigationMenu />}</div>
+            <div>
+              {isClicked && (
+                <MobileNavigationMenu handleIsClicked={handleIsClicked} />
+              )}
+            </div>
           </div>
         </WhiteSpace>
       </nav>
@@ -101,7 +104,11 @@ export default function NavBar() {
   );
 }
 
-const MobileNavigationMenu = () => {
+const MobileNavigationMenu = ({
+  handleIsClicked,
+}: {
+  handleIsClicked: () => {};
+}) => {
   return (
     <div className="w-full mt-3 block md:hidden text-center">
       <div className="w-full">
@@ -112,6 +119,7 @@ const MobileNavigationMenu = () => {
               <li key={data.id}>
                 <Link
                   href={`${data.url}`}
+                  onClick={handleIsClicked}
                   className="relative text-3xl hover:text-main font-light hover:text-primary transition-all"
                 >
                   {data.title}

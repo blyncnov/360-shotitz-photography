@@ -7,7 +7,7 @@ import SocialHandles from "@/components/SocialHandles";
 
 const HeroSection = () => {
   return (
-    <div className="w-full flex gap-2 flex-col">
+    <div className="w-full flex gap-2 flex-col md:my-14 my-4">
       <WhiteSpace>
         <section className="w-full grid grid-cols-[0.3fr_0.7fr] gap-6 pt-6 pb-12">
           <div className="w-full flex flex-col gap-6">
