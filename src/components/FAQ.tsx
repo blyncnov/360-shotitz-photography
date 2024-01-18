@@ -5,6 +5,9 @@ import React, { useState } from "react";
 // Components
 import WhiteSpace from "@/components/WhiteSpace";
 
+// Pattern
+import Wavy_pattern from "../../public/wheel_pattern.png";
+
 interface IFAQS {
   id: number;
   question: string;
@@ -15,27 +18,32 @@ const FAQS_Questions: IFAQS[] = [
   {
     id: 1,
     question: "Are you available to travel?",
-    answer: "yes i am available",
+    answer:
+      "We are based in Lagos, Nigeria and are always available to travel in and out of Nigeria. If we would need to travel for your event, portrait session etc., you will be responsible for transportation and accommodation expenses.",
   },
   {
     id: 2,
     question: "What is your style?",
-    answer: "my style is awesome",
+    answer:
+      "We are based in Lagos, Nigeria and are always available to travel in and out of Nigeria. If we would need to travel for your event, portrait session etc., you will be responsible for transportation and accommodation expenses.",
   },
   {
     id: 3,
     question: "How do i book?",
-    answer: "book via our site",
+    answer:
+      "We are based in Lagos, Nigeria and are always available to travel in and out of Nigeria. If we would need to travel for your event, portrait session etc., you will be responsible for transportation and accommodation expenses.",
   },
   {
     id: 4,
     question: "What is the time span for booking?",
-    answer: "2months or so",
+    answer:
+      "We are based in Lagos, Nigeria and are always available to travel in and out of Nigeria. If we would need to travel for your event, portrait session etc., you will be responsible for transportation and accommodation expenses.",
   },
   {
     id: 5,
     question: "Do you deliver raw photos?",
-    answer: "yes we do deliver raw",
+    answer:
+      "We are based in Lagos, Nigeria and are always available to travel in and out of Nigeria. If we would need to travel for your event, portrait session etc., you will be responsible for transportation and accommodation expenses.",
   },
 ];
 
@@ -47,18 +55,26 @@ const FrequentlyAskedQuestions = () => {
   };
 
   return (
-    <div className="py-12">
+    <div
+      className="py-12"
+      style={{
+        background: `url(${Wavy_pattern.src}) 100px no-repeat`,
+        backgroundPosition: "bottom right",
+        backgroundSize: "300px",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <WhiteSpace>
         <div className="w-full flex flex-col gap-12">
           <div className="w-full text-center flex flex-col gap-4 max-w-3xl mx-auto">
             <h1 className="text-4xl font-bold">Frequently Asked Questions</h1>
             <p
               style={{ lineHeight: 1.7 }}
-              className="text-lg font-normal text-white opacity-65"
+              className="text-lg font-normal text-white opacity-65 normal_text"
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit,
-              tempore explicabo eaque sequi repellat id! A iste explicabo
-              consequatur praesentium.
+              Over time, these are the questions that are frequently asked by
+              our users. Check it out, your question might have just been
+              answered
             </p>
           </div>
           <div className="w-full max-w-4xl mx-auto mt-20">
@@ -95,10 +111,7 @@ const FrequentlyAskedQuestions = () => {
                     <div className="w-full bg-black h-full text-white rounded-xl p-4 flex flex-col gap-3">
                       <h2 className="text-4xl">✧</h2>
                       <p className="text-sm text-center font-normal leading-6">
-                        {`${FAQS_Questions[FAQIndex].answer} Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Reprehenderit nemo sit omnis, praesentium delectus sequi
-                        veniam deleniti repellat ducimus qui dignissimos fugiat
-                        consequuntur earum ratione blanditiis tenetur beatae?`}
+                        {`${FAQS_Questions[FAQIndex].answer} `}
                       </p>
                     </div>
                   </div>

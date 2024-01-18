@@ -3,20 +3,31 @@ import React from "react";
 // Components
 import WhiteSpace from "@/components/WhiteSpace";
 
+// Pattern
+import Wavy_pattern from "../../public/wavy_pattern.png";
+
 const Pricing = () => {
   return (
-    <div className="py-12">
+    <div
+      className="py-12"
+      style={{
+        background: `url(${Wavy_pattern.src}) 100px no-repeat, url(${Wavy_pattern.src}) 100px no-repeat`,
+        backgroundPosition: "left top, bottom right",
+        backgroundSize: "400px",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <WhiteSpace>
         <div className="w-full flex flex-col gap-12">
           <div className="w-full text-center flex flex-col gap-4 max-w-3xl mx-auto">
             <h1 className="text-4xl font-bold">Pricing</h1>
             <p
               style={{ lineHeight: 1.7 }}
-              className="text-lg font-normal text-white opacity-65"
+              className="text-lg font-normal text-white opacity-65 normal_text"
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit,
-              tempore explicabo eaque sequi repellat id! A iste explicabo
-              consequatur praesentium.
+              This is the list containing below price tag including the services
+              expected for each price. Each plan is carefully curated to provide
+              you with the best service per each plan
             </p>
           </div>
           <div className="w-full max-w-4xl mx-auto grid gap-x-12 gap-y-6 md:grid-cols-3 grid-cols-1 justify-center items-center">

@@ -14,7 +14,7 @@ const HeroSection = () => {
             <h1 className="text-5xl font-semibold text-primary">
               360 Shotitz Photography
             </h1>
-            <p className="text-white text-lg font-normal">
+            <p className="text-white text-lg font-normal normal_text">
               Event/Portrait Photographer & Film Maker.
             </p>
             <div>

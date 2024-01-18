@@ -6,6 +6,9 @@ import Image from "next/image";
 // Components
 import WhiteSpace from "@/components/WhiteSpace";
 
+// Pattern
+import Wavy_pattern from "../../public/wheel_pattern.png";
+
 interface ITestimonial {
   id: number;
   image: string;
@@ -18,21 +21,21 @@ const Clients_Testimonial: ITestimonial[] = [
     id: 1,
     image: "Are you available to travel?",
     testimony:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, tempore explicabo eaque sequi repellat id! A iste explicabo consequatur praesentium.",
+      "Visitor I had occasion to visit this hospital recently to support a friend who was receiving treatment. While I wasn't a patient myself, I was struck by the warm and welcoming atmosphere of the hospital. The staff were friendly and helpful, and the facilities were clean, modern, and comfortable. Overall, I was very impressed with this hospital and would recommend it to anyone in need of medical care.",
     name: "Taiwo Jeremy",
   },
   {
     id: 2,
     image: "What is your style?",
     testimony:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, tempore explicabo eaque sequi repellat id! A iste explicabo consequatur praesentium.",
+      "Visitor I had occasion to visit this hospital recently to support a friend who was receiving treatment. While I wasn't a patient myself, I was struck by the warm and welcoming atmosphere of the hospital. The staff were friendly and helpful, and the facilities were clean, modern, and comfortable. Overall, I was very impressed with this hospital and would recommend it to anyone in need of medical care.",
     name: "Chibuke Victoria",
   },
   {
     id: 3,
     image: "How do i book?",
     testimony:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, tempore explicabo eaque sequi repellat id! A iste explicabo consequatur praesentium.",
+      "Visitor I had occasion to visit this hospital recently to support a friend who was receiving treatment. While I wasn't a patient myself, I was struck by the warm and welcoming atmosphere of the hospital. The staff were friendly and helpful, and the facilities were clean, modern, and comfortable. Overall, I was very impressed with this hospital and would recommend it to anyone in need of medical care.",
     name: "Antonio Maize",
   },
 ];
@@ -40,18 +43,25 @@ const Clients_Testimonial: ITestimonial[] = [
 const Testimonials = () => {
   const [testimonyIndex, setTestimonyIndex] = useState(0);
   return (
-    <div className="py-12">
+    <div
+      className="py-12"
+      style={{
+        background: `url(${Wavy_pattern.src}) 100px no-repeat`,
+        backgroundPosition: "top right",
+        backgroundSize: "200px",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <WhiteSpace>
         <div className="w-full flex flex-col gap-12">
           <div className="w-full text-center flex flex-col gap-4 max-w-3xl mx-auto">
             <h1 className="text-4xl font-bold">Testimonials</h1>
             <p
               style={{ lineHeight: 1.7 }}
-              className="text-lg font-normal text-white opacity-65"
+              className="text-lg font-normal text-white opacity-65 normal_text"
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit,
-              tempore explicabo eaque sequi repellat id! A iste explicabo
-              consequatur praesentium.
+              Here is some of the feedbacks we have gotten from our customers
+              over time. Join the clique now!
             </p>
           </div>
         </div>
@@ -81,7 +91,7 @@ const Testimonials = () => {
                 <title>quote</title>
                 <path d="M9.563 8.469l-0.813-1.25c-5.625 3.781-8.75 8.375-8.75 12.156 0 3.656 2.688 5.375 4.969 5.375 2.875 0 4.906-2.438 4.906-5 0-2.156-1.375-4-3.219-4.688-0.531-0.188-1.031-0.344-1.031-1.25 0-1.156 0.844-2.875 3.938-5.344zM21.969 8.469l-0.813-1.25c-5.563 3.781-8.75 8.375-8.75 12.156 0 3.656 2.75 5.375 5.031 5.375 2.906 0 4.969-2.438 4.969-5 0-2.156-1.406-4-3.313-4.688-0.531-0.188-1-0.344-1-1.25 0-1.156 0.875-2.875 3.875-5.344z"></path>
               </svg>
-              <p className="text-lg mt-12">
+              <p className="text-lg mt-12 normal_text">
                 {Clients_Testimonial[testimonyIndex].testimony}
               </p>
               <div className="w-full flex justify-between gap-4 items-center mt-6">

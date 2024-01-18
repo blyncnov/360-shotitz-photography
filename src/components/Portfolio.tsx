@@ -16,11 +16,10 @@ const Portfolio = () => {
 
             <p
               style={{ lineHeight: 1.7 }}
-              className="text-lg font-normal text-white opacity-65"
+              className="text-lg font-normal text-white opacity-65 normal_text"
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit,
-              tempore explicabo eaque sequi repellat id! A iste explicabo
-              consequatur praesentium.
+              Our Portfolio showcase a few of our works so far, Have a glance at
+              the masterpiece we have created.
             </p>
           </div>
           <div className="w-full">

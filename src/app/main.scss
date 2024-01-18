@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rozha+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind utilities;
@@ -65,12 +66,21 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.normal_text {
+  font-family: 'IBM Plex Sans', sans-serif !important;
+}
+
 /* Change the white auto fill to any color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+input {
+  font-family: 'IBM Plex Sans', sans-serif !important;
+  color: #000000 !important;
 }
 
 .gallery {
