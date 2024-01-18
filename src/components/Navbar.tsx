@@ -107,7 +107,7 @@ export default function NavBar() {
 const MobileNavigationMenu = ({
   handleIsClicked,
 }: {
-  handleIsClicked: () => {};
+  handleIsClicked: () => void;
 }) => {
   return (
     <div className="w-full mt-3 block md:hidden text-center">
