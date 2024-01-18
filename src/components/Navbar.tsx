@@ -1,8 +1,6 @@
 "use client";
 
-import React from "react";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,6 +10,7 @@ import WhiteSpace from "@/components/WhiteSpace";
 // Brand Logo
 import ShotitzLogo from "../../public/brand/logo.jpeg";
 
+// Icons
 import { MdArrowOutward } from "react-icons/md";
 
 // Navbar Data
