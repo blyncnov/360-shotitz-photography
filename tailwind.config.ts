@@ -18,6 +18,13 @@ const config: Config = {
         black: "#000000",
         primary: "#FF6B03",
         secondary: "#ffe6c9",
+        sidebar: "#111111",
+        dashboard: "#000000",
+        dashboardText: "##969696",
+        dashboardGray: "#3C3C3C",
+      },
+      borderColor: {
+        gy: "#3C3C3C",
       },
     },
   },

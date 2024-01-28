@@ -11,6 +11,8 @@
   box-sizing: border-box;
   list-style-type: none;
   text-decoration: none;
+
+  // transition: all 0.5s ease-in-out;
 }
 
 @layer utilities {
@@ -38,7 +40,8 @@
   --black: #000000;
   --primary-color: #FF6B03;
   --secondary-color: #ffe6c9;
-  --dashboard-background: #eff2f5;
+  --dashboard-background: #000000;
+  --dashboard-sidebar-background: #111111;
   --hover-state: #eff2f5;
 }
 
@@ -64,6 +67,7 @@ html {
   -moz-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
 }
 
 .normal_text {
