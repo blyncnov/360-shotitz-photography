@@ -93,7 +93,7 @@ const BucksSideBar = () => {
             <p className=" text-[16px]">Profile</p>
           </Link>
           <div
-            onClick={ClosedashboarSidebar}
+            onClick={signOutHandler}
             className="w-full font-normal flex items-center gap-2 cursor-pointer py-3 px-4 rounded hover:bg-dashboardGray"
           >
             <TbLogout className="text-xl " />
