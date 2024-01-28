@@ -6,39 +6,37 @@ import { MdOutlinePending } from "react-icons/md";
 const BookingsTable = () => {
   return (
     <>
-      <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md">
-        <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
+      <div className="overflow-hidden rounded-lg text-white shadow-md">
+        <table className="w-full border-collapse bg-transparent text-left text-sm text-white">
           <thead>
             <tr>
-              <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+              <th scope="col" className="px-6 py-4 font-medium text-lg">
                 Booking Date
               </th>
-              <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+              <th scope="col" className="px-6 py-4 font-medium text-lg">
                 Payment Status
               </th>
-              <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+              <th scope="col" className="px-6 py-4 font-medium text-lg">
                 Booking Status
               </th>
-              <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+              <th scope="col" className="px-6 py-4 font-medium text-lg">
                 Shooting Date
               </th>
-              <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+              <th scope="col" className="px-6 py-4 font-medium text-lg">
                 Plan Type
               </th>
-              <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+              <th scope="col" className="px-6 py-4 font-medium text-lg">
                 Price
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+          <tbody className="w-full  border-gray-100 opacity-70">
             {[1, 2, 3, 4].map((item) => {
               return (
-                <tr className="hover:bg-gray-50" key={item}>
-                  <td className="flex gap-3 px-6 py-4 font-normal text-gray-900">
+                <tr className="w-full" key={item}>
+                  <td className="flex gap-3 px-6 py-4 font-normal">
                     <div className="text-sm">
-                      <div className="font-medium text-gray-700">
-                        23/05/2024
-                      </div>
+                      <div className="font-medium">23/05/2024</div>
                     </div>
                   </td>
                   <td className="px-6 py-4">

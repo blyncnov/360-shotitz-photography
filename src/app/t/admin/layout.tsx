@@ -15,14 +15,16 @@ export default function BucksDashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <body
-      className={`${inter.className} h-screen min-h-screen max-h-screen bg-dashboard`}
-    >
-      <AdminLayout>
-        <MySideBar />
-        <AdminMainSection>{children}</AdminMainSection>
-      </AdminLayout>
-    </body>
+    <html lang="en">
+      <body
+        className={`${inter.className} h-screen min-h-screen max-h-screen bg-dashboard`}
+      >
+        <AdminLayout>
+          <MySideBar />
+          <AdminMainSection>{children}</AdminMainSection>
+        </AdminLayout>
+      </body>
+    </html>
   );
 }
 
