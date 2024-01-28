@@ -16,13 +16,14 @@ const SimpleInteraction = () => {
   return (
     <div className="w-full text-white max-w-full min-w-full grid grid-cols-1 gap-8">
       <div className="w-full max-w-full min-w-full flex justify-between items-center gap-4">
-        <h1 className="text-2xl font-semibold">Dashboard Overview</h1>
+        <h1 className="text-xl font-semibold opacity-85">Dashboard Overview</h1>
         <Link href={`/dashboard/bookings`}>
           <button
             title="create bucks"
             className="bg-[var(--primary-color)] text-white text-sm shadow p-3 rounded-xl flex gap-1 items-center cursor-pointer"
           >
-            <LuPlus className="text-xl" /> Create Booking
+            <LuPlus className="text-xl" />{" "}
+            <span className="md:block hidden">Create Booking</span>
           </button>
         </Link>
       </div>
@@ -61,7 +62,9 @@ const SimpleInteraction = () => {
               <BsStars />
             </div>
             <div className="w-auto flex flex-col gap-1">
-              <h1 className="text-xl font-semibold">Gallery Image</h1>
+              <h1 className="text-2xl font-semibold opacity-85">
+                Gallery Image
+              </h1>
               <p className="text-xl font-normal opacity-50">$30</p>
             </div>
           </div>
@@ -69,7 +72,9 @@ const SimpleInteraction = () => {
       </div>
       <div className="w-full flex flex-col gap-4">
         <div className="w-full max-w-full min-w-full flex justify-between items-center">
-          <h1 className="text-2xl font-semibold">Recently View Image</h1>
+          <h1 className="text-xl font-semibold opacity-85">
+            Recently View Image
+          </h1>
           <button
             title="create bucks"
             className="text-white text-sm shadow p-3 rounded-xl flex gap-1 items-center cursor-pointer"
@@ -142,7 +147,7 @@ const SimpleInteraction = () => {
 
       <div className="w-full flex flex-col gap-4">
         <div className="w-full max-w-full min-w-full flex justify-between items-center">
-          <h1 className="text-2xl font-semibold">Recent Bookings</h1>
+          <h1 className="text-xl font-semibold opacity-85">Recent Bookings</h1>
         </div>
 
         <div className="w-full my-6">

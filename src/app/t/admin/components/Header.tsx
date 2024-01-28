@@ -8,7 +8,9 @@ const AdminHeader = () => {
   return (
     <div>
       <div className="min-h-[80px] max-h-[80px h-[80px] px-6 w-full border-b bg-sidebar border-gy text-white flex justify-between items-center gap-6">
-        <div></div>
+        <div>
+          <h1 className="text-xl opacity-70">Dashboard</h1>
+        </div>
         <div className="w-full max-w-xl md:block hidden">
           <input
             type="search"

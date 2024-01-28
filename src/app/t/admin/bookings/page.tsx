@@ -31,7 +31,8 @@ const Bookings = () => {
             title="create bucks"
             className="bg-[var(--primary-color)] text-white text-sm shadow p-3 rounded-xl flex gap-1 items-center cursor-pointer"
           >
-            <LuPlus className="text-xl" /> Create Booking
+            <LuPlus className="text-xl" />{" "}
+            <span className="md:block hidden">Create Booking</span>
           </button>
         </Link>
       </div>
