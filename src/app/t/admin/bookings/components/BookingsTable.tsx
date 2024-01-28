@@ -30,10 +30,13 @@ const BookingsTable = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="w-full  border-gray-100 opacity-70">
+          <tbody className="w-full  border-gray-100 opacity-70 ">
             {[1, 2, 3, 4].map((item) => {
               return (
-                <tr className="w-full" key={item}>
+                <tr
+                  className="w-full hover:bg-[white]/10 cursor-pointer"
+                  key={item}
+                >
                   <td className="flex gap-3 px-6 py-4 font-normal">
                     <div className="text-sm">
                       <div className="font-medium">23/05/2024</div>
