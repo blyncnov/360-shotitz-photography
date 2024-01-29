@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 import MySideBar from "./components/Sidebar";
 import AdminHeader from "./components/Header";
 
-export default function BucksDashboardLayout({
+export default function AdminDashboardLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -31,7 +31,7 @@ export default function BucksDashboardLayout({
 // Bucks Layout components
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="w-full h-screen min-h-screen max-h-screen grid grid-cols-1 md:grid-cols-[250px_1fr] overflow-y-scroll">
+    <div className="w-full h-screen min-h-screen max-h-screen grid grid-cols-1 md:grid-cols-[250px_1fr]">
       {children}
     </div>
   );
@@ -42,7 +42,7 @@ const AdminMainSection = ({ children }: { children: React.ReactNode }) => {
   return (
     <section className="relative w-full h-screen no-scrollbar min-w-full max-w-full overflow-y-scroll">
       <AdminHeader />
-      <main className="w-full max-w-full min-w-full p-6 text-white">
+      <main className="w-full max-w-full min-w-full p-6 text-white overflow-y-scroll">
         {children}
       </main>
     </section>

@@ -8,16 +8,6 @@ export const metadata: Metadata = {
   description: "Event, Potrait photographer and film maker",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body>
-        <div>{children}</div>
-      </body>
-    </html>
-  );
+export default function TLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }
