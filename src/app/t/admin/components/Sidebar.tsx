@@ -38,7 +38,7 @@ const BucksSideBar = () => {
 
   return (
     <div
-      className={`md:relative md:w-full w-[250px] md:h-screen bg-sidebar border-gy border-r border-t shadow-sm px-1 md:block transition-all duration-150 fixed h-screen z-[999999] ${
+      className={`md:relative md:w-full w-[250px] md:h-screen bg-sidebar border-gy border-r border-t shadow-sm px-1 md:block transition-all duration-[1s] fixed h-screen z-[999999] ${
         !isDashboardSidebarOpen ? "left-[-100%] md:left-0" : "left-0"
       }`}
     >
