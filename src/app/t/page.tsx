@@ -1,11 +1,5 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
-const TJunction = () => {
-  return (
-    <div>
-      <h1>TJunction</h1>
-    </div>
-  );
-};
-
-export default TJunction;
+export default function TService() {
+  return redirect("/t/admin");
+}
