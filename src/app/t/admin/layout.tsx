@@ -15,16 +15,16 @@ export default function AdminDashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
+    <div lang="en">
+      <div
         className={`${inter.className} h-screen min-h-screen max-h-screen bg-dashboard`}
       >
         <AdminLayout>
           <MySideBar />
           <AdminMainSection>{children}</AdminMainSection>
         </AdminLayout>
-      </body>
-    </html>
+      </div>
+    </div>
   );
 }
 
