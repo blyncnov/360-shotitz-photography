@@ -18,8 +18,8 @@ const Portfolio = () => {
               style={{ lineHeight: 1.7 }}
               className="text-lg font-normal text-white opacity-65 normal_text"
             >
-              Our Portfolio showcase a few of our works so far, Have a glance at
-              the masterpiece we have created.
+              Behind the lens comes some of our amazing event photography and
+              video content.
             </p>
           </div>
           <div className="w-full">

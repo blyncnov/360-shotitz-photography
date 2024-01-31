@@ -25,9 +25,9 @@ const Pricing = () => {
               style={{ lineHeight: 1.7 }}
               className="text-lg font-normal text-white opacity-65 normal_text"
             >
-              This is the list containing below price tag including the services
-              expected for each price. Each plan is carefully curated to provide
-              you with the best service per each plan
+              We offer quality services at pocket-friendly prices. Message us
+              today so we can create your custom shot list that entails your
+              event needs.
             </p>
           </div>
           <div className="w-full md:max-w-4xl max-w-3xl mx-auto grid gap-x-12 gap-y-6 md:grid-cols-3 grid-cols-1 justify-center items-center">

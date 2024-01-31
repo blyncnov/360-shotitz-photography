@@ -32,7 +32,7 @@ const AboutUs = () => {
             <Image
               src={Shoot}
               alt="about us image"
-              className="w-full object-cover rounded h-full min-h-[500px]"
+              className="w-full object-cover rounded h-full min-h-[400px]"
             />
           </div>
           <div>
@@ -40,34 +40,27 @@ const AboutUs = () => {
               className="text-sm normal_text opacity-95"
               style={{ lineHeight: 2 }}
             >
-              Fill pencil draft union layer blur underline editor. Connection
-              device ellipse vector line pixel. Outline text export distribute
-              duplicate. Outline subtract object ellipse strikethrough pen
-              bullet inspect. Component scrolling plugin prototype pen align
-              content shadow mask auto. Font team rotate connection flatten.
-              Undo invite overflow style move style plugin. Arrange background
-              ellipse shadow export image thumbnail draft plugin. Create
-              background image align undo effect selection mask reesizing text.
-              Edit align overflow group select polygon plugin distribute. Union
-              clip thumbnail variant vertical community clip. Flatten select
-              mask union flatten. Component figma pixel strikethrough component
-              thumbnail layout scale create duplicate. Blur thumbnail variant
-              font overflow editor figma arrange prototype prototype. Undo mask
-              object invite duplicate asset hand inspect reesizing. Draft
-              variant connection prototype rotate project. Selection thumbnail
-              underline invite layout reesizing. Ipsum text blur asset bold
-              device selection. Star subtract shadow underline prototype vector
-              polygon. Text vertical polygon hand content. Figma bold team
-              bullet selection scrolling horizontal select. Subtract thumbnail
-              clip background line scrolling undo. Main blur star effect draft
-              font. Duplicate library underline hand follower device. Frame fill
-              hand figma library align underline polygon line asset. Fill create
-              community undo vector scale asset. Select thumbnail team
-              distribute star content frame underline bold layout. Distribute
-              boolean export pencil connection polygon export editor. Project
-              library figma device list bullet slice flatten follower. Boolean
-              list plugin frame object follower mask distribute thumbnail. Layer
-              align variant content blur undo.
+              We strive to offer the best photography and visual experience
+              available in Nigeria by delivering the perfect combination of
+              professionalism, quality, and innovation. Our company specializes
+              in event photography, fashion shoots, drone services, visual
+              creation, and many more, capturing the joy and essence of every
+              occasion with a combination of a keen eye for detail and
+              state-of-the-art equipment that leaves you pleased forever. Our
+              well-trained team of professional photographers and videographers
+              are engineered to immortalize your events into stunning visuals
+              that last a lifetime. Our root in innovation and quality allows us
+              to consistently produce captivating digital content that our
+              customers absolutely fall in love with. We understand that your
+              events are extremely important, so we offer friendly and quality
+              services that go the extra mile to make your day a memorable one.
+              We pride ourselves in our ability to satisfy our customers in
+              every single event we handle.
+              <br />
+              <br />
+              Having over 1206 satisfied customers across Nigeria, it is time to
+              see you happy when browsing through your completed project. In the
+              meantime, here are some of our concluded projects
             </p>
 
             <div className="w-full flex gap-12 my-4">

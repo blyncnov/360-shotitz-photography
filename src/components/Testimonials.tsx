@@ -21,22 +21,29 @@ const Clients_Testimonial: ITestimonial[] = [
     id: 1,
     image: "Are you available to travel?",
     testimony:
-      "Visitor I had occasion to visit this hospital recently to support a friend who was receiving treatment. While I wasn't a patient myself, I was struck by the warm and welcoming atmosphere of the hospital. The staff were friendly and helpful, and the facilities were clean, modern, and comfortable. Overall, I was very impressed with this hospital and would recommend it to anyone in need of medical care.",
-    name: "Taiwo Jeremy",
+      "Even though the notice was short, 360 Shotitz came through for my in-house birthday photoshoot. They gave me the best shots I’ve ever had. I wanted 5 pictures but ended up choosing 13 because all came out good. The angle, the style, and the editing were on point.",
+    name: "Shola Adekunle",
   },
   {
     id: 2,
     image: "What is your style?",
     testimony:
-      "Visitor I had occasion to visit this hospital recently to support a friend who was receiving treatment. While I wasn't a patient myself, I was struck by the warm and welcoming atmosphere of the hospital. The staff were friendly and helpful, and the facilities were clean, modern, and comfortable. Overall, I was very impressed with this hospital and would recommend it to anyone in need of medical care.",
-    name: "Chibuke Victoria",
+      "Had a wonderful experience with the team. The camera guys explained the whole process in detail and made it a worthwhile experience.  The process of scheduling, location, and receiving my videos and pictures was streamless. I highly recommend them.",
+    name: "Christiana Johnson",
   },
   {
     id: 3,
     image: "How do i book?",
     testimony:
-      "Visitor I had occasion to visit this hospital recently to support a friend who was receiving treatment. While I wasn't a patient myself, I was struck by the warm and welcoming atmosphere of the hospital. The staff were friendly and helpful, and the facilities were clean, modern, and comfortable. Overall, I was very impressed with this hospital and would recommend it to anyone in need of medical care.",
-    name: "Antonio Maize",
+      "This place is amazing. The studio has a lot of professional lighting and the photographer did an incredible job. I was told where to look, how to pose, and when to smile, which I think contributed to the awesome look of my pictures. I have them plastered all over my social media accounts and my friends keep saying good things about me. I am highly appreciative of this studio. I’ll definitely be back for more studio sections.",
+    name: "Ruth Aderogba",
+  },
+  {
+    id: 3,
+    image: "How do i book?",
+    testimony:
+      "Great job guys. My wedding pictures and videos are so clear and detailed. I’m glad I listened to my friend’s recommendation of this company. If you require a competent company for your digital needs, this is the right place.",
+    name: "Feyi Adeagbo",
   },
 ];
 
