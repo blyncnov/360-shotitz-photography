@@ -10,7 +10,7 @@ import { IoArrowBackSharp } from "react-icons/io5";
 import { BiSolidEdit } from "react-icons/bi";
 
 // Ghost Image
-import GhostImage from "../../_assets/ghost.jpeg";
+import GhostImage from "../../../../public/ghost.jpeg";
 
 // Define the type  element (HTMLInputElement)
 type InputRefType = HTMLInputElement;

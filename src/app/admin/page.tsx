@@ -16,8 +16,7 @@ const DashboardHome = () => {
 
   return (
     <>
-      <BookingProcess />
-
+      {/* <BookingProcess /> */}
       <div className="w-full text-white max-w-full min-w-full grid grid-cols-1 gap-8">
         <div className="w-full max-w-full min-w-full flex justify-between items-center gap-4">
           <h1 className="text-xl font-semibold opacity-85">

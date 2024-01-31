@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 // Image
-import NothingFound from "../../_assets/nothing.png";
+import NothingFound from "../../../../public/nothing.png";
 
 const RecentBookingsEmptyState = () => {
   return (

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Bucks Logo
-import ShotitZPhotographyLogo from "../../_assets/logo.png";
+import ShotitZPhotographyLogo from "../../../../public/brand/dlogo.png";
 
 // Icon
 import { RiHome5Line } from "react-icons/ri";
@@ -15,7 +15,7 @@ import { GrGallery } from "react-icons/gr";
 import { MdOutlineLibraryBooks } from "react-icons/md";
 
 // Admin Store
-import AdminStore from "../../../../../store/store";
+import AdminStore from "../../../../store/store";
 
 // SideBar Component
 const BucksSideBar = () => {
@@ -61,7 +61,7 @@ const BucksSideBar = () => {
       <div className="relative w-full max-w-full min-w-full py-6 px-3">
         <div className="sidebar-items w-full flex flex-col gap-3 items-start justify-start text-dashboardText">
           <Link
-            href="/t/admin"
+            href="/admin"
             onClick={ClosedashboarSidebar}
             className="font-medium flex items-center gap-2 cursor-pointer py-3 px-4 w-full rounded hover:bg-dashboardGray"
           >
@@ -69,7 +69,7 @@ const BucksSideBar = () => {
             <p className=" text-[16px]">Home</p>
           </Link>
           <Link
-            href="/t/admin/bookings"
+            href="/admin/bookings"
             onClick={ClosedashboarSidebar}
             className="w-full font-normal flex items-center gap-2 cursor-pointer py-3 px-4 rounded hover:bg-dashboardGray"
           >
@@ -77,7 +77,7 @@ const BucksSideBar = () => {
             <p className=" text-[16px]">Bookings</p>
           </Link>
           <Link
-            href="/t/admin/gallery"
+            href="/admin/gallery"
             onClick={ClosedashboarSidebar}
             className="w-full font-normal flex items-center gap-2 cursor-pointer py-3 px-4 rounded hover:bg-dashboardGray"
           >
@@ -85,7 +85,7 @@ const BucksSideBar = () => {
             <p className=" text-[16px]">Gallery</p>
           </Link>
           <Link
-            href="/t/admin/profile"
+            href="/admin/profile"
             onClick={ClosedashboarSidebar}
             className="w-full font-normal flex items-center gap-2 cursor-pointer py-3 px-4 rounded hover:bg-dashboardGray"
           >

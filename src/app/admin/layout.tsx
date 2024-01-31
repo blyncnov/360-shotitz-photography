@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 
 // STYLE: Gblobal Style
-import "../../main.scss";
+import "../main.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +15,7 @@ export default function AdminDashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div lang="en">
+    <>
       <div
         className={`${inter.className} h-screen min-h-screen max-h-screen bg-dashboard`}
       >
@@ -24,7 +24,7 @@ export default function AdminDashboardLayout({
           <AdminMainSection>{children}</AdminMainSection>
         </AdminLayout>
       </div>
-    </div>
+    </>
   );
 }
 
