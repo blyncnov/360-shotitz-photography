@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Components
 import WhiteSpace from "@/components/WhiteSpace";
@@ -7,22 +8,43 @@ import SocialHandles from "@/components/SocialHandles";
 
 const HeroSection = () => {
   return (
-    <div className="w-full flex gap-2 flex-col md:my-14 my-4">
+    <div className="w-full flex gap-2 flex-col">
       <WhiteSpace>
-        <section className="w-full grid grid-cols-[0.3fr_0.7fr] gap-6 pt-6 pb-12">
-          <div className="w-full flex flex-col gap-6">
-            <h1 className="text-5xl font-semibold text-primary">
-              360 Shotitz Photography
-            </h1>
-            <p className="text-white text-lg font-normal normal_text">
-              Event/Portrait Photographer & Film Maker.
-            </p>
-            <div>
+        <section className="w-full grid grid-cols-[0.3fr_0.7fr] gap-6 pb-12">
+          <div className="w-full flex flex-col gap-3">
+            <div className="w-full flex flex-col gap-2">
+              <h1 className="text-5xl font-semibold text-primary">
+                360 Shotitz Photography
+              </h1>
+              <p className="text-white text-lg font-normal normal_text">
+                Capturing life’s special moments that last a lifetime with
+                professionalism and innovation since 2013.
+              </p>
+            </div>
+
+            <div className="w-full flex flex-col gap-2">
+              <div className="w-full flex gap-12 my-4">
+                <div className="flex flex-col items-center justify-center">
+                  <h2 className="text-3xl text-primary">1206+</h2>
+                  <p>Happy Clients</p>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <h2 className="text-3xl text-primary">10+</h2>
+                  <p>Work Experience </p>
+                </div>
+              </div>
+              <Link href="/">
+                <button className="w-3/5 py-3 px-6 shadow inline-flex bg-[var(--primary-color)] hover:text-main justify-center items-center gap-2 rounded-full font-medium text-white align-middle transition-all text-md">
+                  Learn More
+                </button>
+              </Link>
+            </div>
+            <div className="w-full mt-6">
               <SocialHandles />
             </div>
           </div>
           <div className="relative w-full h-full">
-            <div className="w-full h-full flex overflow-x-scroll no-scrollbar gap-12 items-center absolute -top-12 left-0 right-0 min-h-[450px]">
+            <div className="w-full h-full flex overflow-x-scroll no-scrollbar gap-12 items-center absolute -bottom-12 left-0 right-0 min-h-[450px]">
               {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((data, index) => {
                 return (
                   <div
