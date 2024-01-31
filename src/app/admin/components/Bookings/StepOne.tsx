@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 const BookingProcessOne = () => {
   return (
-    <div>
+    <div className="w-full flex flex-col gap-4">
       <div className="w-full flex flex-col gap-2">
         <h1 className="text-3xl text-primary">Create Bookings</h1>
       </div>

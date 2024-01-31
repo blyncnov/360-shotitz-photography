@@ -6,7 +6,6 @@ import { FaTimes } from "react-icons/fa";
 // booking process - steps
 import BookingProcessOne from "./StepOne";
 import BookingProcessTwo from "./StepTwo";
-import BookingProcessThree from "./StepThree";
 import FinalStep from "./FinalStep";
 
 const BookingProcess = ({
