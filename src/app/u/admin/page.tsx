@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
 // Icons
 import { CiMoneyBill } from "react-icons/ci";
 import { BsStars } from "react-icons/bs";
 
 // Components
-import RecentBookingsEmptyState from "./components/Nothing";
+// import RecentBookingsEmptyState from "./components/Nothing";
 
 const DashboardHome = () => {
   return (
@@ -142,7 +142,7 @@ const BookingsTable = () => {
                   <td className="px-6 py-4">23</td>
                   <td className="px-6 py-4">23/09/2024</td>
                   <td className="px-6 py-4">Plan Name</td>
-                  <td className="px-6 py-4">₦4,100</td>
+                  <td className="px-6 py-4">₦4,000</td>
                 </tr>
               );
             })}

@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 // Icons
 import { LuPlus } from "react-icons/lu";
 import { IoArrowBackSharp } from "react-icons/io5";
-import { BiSolidEdit } from "react-icons/bi";
 
 // Ghost Image
 import GhostImage from "../../../../../public/ghost.jpeg";

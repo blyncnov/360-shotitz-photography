@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import React from "react";
 import { useRouter } from "next/navigation";
 
 // Icons
 import { IoArrowBackSharp } from "react-icons/io5";
-import { LuPlus } from "react-icons/lu";
-import BookingsTable from "./components/BookingsTable";
 
-//
+// Components
+import BookingsTable from "./components/BookingsTable";
 
 const Bookings = () => {
   const router = useRouter();
