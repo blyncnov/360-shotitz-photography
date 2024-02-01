@@ -8,6 +8,7 @@ import { FaTimes } from "react-icons/fa";
 // booking process - steps
 import BookingProcessOne from "./StepOne";
 import BookingProcessTwo from "./StepTwo";
+import BookingProcessThree from "./StepThree";
 import FinalStep from "./FinalStep";
 
 const BookingProcess = ({
@@ -19,8 +20,12 @@ const BookingProcess = ({
   const [bookingSteps, setBookingSteps] = useState(1);
 
   const HandleBookingProcessSubmission = () => {
-    if (bookingSteps === 3) {
-      return console.log(bookingInfo);
+    if (bookingSteps === 4) {
+      // TODO: CALL API TO MAKE BOOKINGS RATHER THAN CONSOLE LOGGING IT
+      console.log(bookingInfo);
+
+      // END BOOKING PROCESS
+      return setisStartBookingProcess(false);
     } else {
       setBookingSteps(bookingSteps + 1);
     }
@@ -31,17 +36,27 @@ const BookingProcess = ({
       <div className="relative bg-black w-[90%] md:w-[600px] rounded-lg p-3 min-h-[90dvh] px-4 md:px-10 py-6 pb-10 shadow-2xl flex gap-6 flex-col justify-start items-start">
         <div className="w-full flex flex-col gap-2">
           <div className="w-full">
-            {bookingSteps === 1 && <BookingProcessOne />}
-            {bookingSteps === 2 && <BookingProcessTwo />}
-            {bookingSteps === 3 && <FinalStep />}
+            {bookingSteps === 1 && (
+              <BookingProcessOne setBookingInfo={setBookingInfo} />
+            )}
+            {bookingSteps === 2 && (
+              <BookingProcessTwo setBookingInfo={setBookingInfo} />
+            )}
+            {bookingSteps === 3 && (
+              <BookingProcessThree setBookingInfo={setBookingInfo} />
+            )}
+            {bookingSteps === 4 && (
+              <FinalStep setBookingInfo={setBookingInfo} />
+            )}
 
             <button
-              className="w-full min-h-12 bg-primary rounded-md mt-3"
+              className="w-full min-h-12 bg-primary rounded-md mt-6"
               onClick={HandleBookingProcessSubmission}
             >
               {bookingSteps === 1 && "Make payment"}
               {bookingSteps === 2 && "Next"}
-              {bookingSteps === 3 && "Completed"}
+              {bookingSteps === 3 && "Next"}
+              {bookingSteps === 4 && "Completed"}
             </button>
           </div>
         </div>

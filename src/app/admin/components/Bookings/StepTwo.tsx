@@ -1,6 +1,10 @@
 import React from "react";
 
-const BookingProcessTwo = () => {
+const BookingProcessTwo = ({
+  setBookingInfo,
+}: {
+  setBookingInfo: React.Dispatch<React.SetStateAction<{}>>;
+}) => {
   return (
     <div className="w-full flex flex-col gap-4">
       <div className="w-full flex flex-col gap-2">

@@ -1,6 +1,10 @@
 import React from "react";
 
-const FinalStep = () => {
+const FinalStep = ({
+  setBookingInfo,
+}: {
+  setBookingInfo: React.Dispatch<React.SetStateAction<{}>>;
+}) => {
   return (
     <div className="w-full flex flex-col justify-between gap-12">
       <div className="w-full flex flex-col gap-4 text-white font-light">

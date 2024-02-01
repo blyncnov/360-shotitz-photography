@@ -14,44 +14,34 @@ const BookingProcessOne = ({
       </div>
 
       <form className="flex flex-col gap-5 mt-8">
-        <div>
-          <label htmlFor="full_name">Full Name</label>
-          <input
-            type="text"
-            id="full_name"
-            name="full_name"
-            placeholder="Enter your Full Name"
+        <div className="flex flex-col gap-1">
+          <label htmlFor="full_name">Shoot Type</label>
+          <select
+            name="shoot_type"
+            id="shoot_type"
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
-          />
+          >
+            <option value="outdoor">Outdoor</option>
+          </select>
         </div>
         <div>
-          <label htmlFor="Phone_number">Phone Number</label>
+          <label htmlFor="Phone_number">Number of Shoot</label>
           <input
             type="number"
-            id="Phone_number"
-            name="Phone_number"
-            placeholder="+2348149055068"
+            id="no_of_shoot"
+            name="no_of_shoot"
+            placeholder="e.g 20"
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           />
         </div>
 
         <div>
-          <label htmlFor="password">Date</label>
+          <label htmlFor="password">Location</label>
           <input
-            type="date"
-            id="date"
-            name="date"
-            placeholder={new Date().getTime.toString()}
-            className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
-          />
-        </div>
-        <div>
-          <label htmlFor="time">Time </label>
-          <input
-            type="time"
-            id="time"
-            name="time"
-            placeholder={new Date().getTime.toString()}
+            type="text"
+            id="location"
+            name="location"
+            placeholder="e.g lagos"
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           />
         </div>
