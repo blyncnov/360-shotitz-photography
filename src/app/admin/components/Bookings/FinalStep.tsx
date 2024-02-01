@@ -28,9 +28,9 @@ const FinalStep = () => {
         </div>
       </div>
 
-      <button className="w-full min-h-12 bg-primary rounded-md mt-3">
+      {/* <button className="w-full min-h-12 bg-primary rounded-md mt-3">
         Completed
-      </button>
+      </button> */}
     </div>
   );
 };

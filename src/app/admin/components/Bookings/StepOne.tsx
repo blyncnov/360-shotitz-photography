@@ -52,11 +52,11 @@ const BookingProcessOne = () => {
           />
         </div>
 
-        <div className="w-full flex flex-col gap-2.5">
+        {/* <div className="w-full flex flex-col gap-2.5">
           <button className="w-full min-h-12 bg-primary rounded-md mt-3">
             Make payment
           </button>
-        </div>
+        </div> */}
       </form>
     </div>
   );

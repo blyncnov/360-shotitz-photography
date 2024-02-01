@@ -12,25 +12,28 @@ import RecentBookingsEmptyState from "./components/Nothing";
 import BookingProcess from "./components/Bookings/BookingProcess";
 
 const DashboardHome = () => {
-  const [isClicked, setIsclicked] = useState(false);
+  const [isStartBookingProcess, setisStartBookingProcess] =
+    useState<Boolean>(false);
 
   return (
     <>
-      <BookingProcess />
+      {isStartBookingProcess && (
+        <BookingProcess setisStartBookingProcess={setisStartBookingProcess} />
+      )}
+
       <div className="w-full text-white max-w-full min-w-full grid grid-cols-1 gap-8">
         <div className="w-full max-w-full min-w-full flex justify-between items-center gap-4">
           <h1 className="text-xl font-semibold opacity-85">
             Dashboard Overview
           </h1>
-          <Link href={`/dashboard/bookings`}>
-            <button
-              title="create bucks"
-              className="bg-[var(--primary-color)] text-white text-sm shadow p-3 rounded-xl flex gap-1 items-center cursor-pointer"
-            >
-              <LuPlus className="text-xl" />{" "}
-              <span className="md:block hidden">Create Booking</span>
-            </button>
-          </Link>
+          <button
+            title="create bookings"
+            onClick={() => setisStartBookingProcess(true)}
+            className="bg-[var(--primary-color)] text-white text-sm shadow p-3 rounded-xl flex gap-1 items-center cursor-pointer"
+          >
+            <LuPlus className="text-xl" />{" "}
+            <span className="md:block hidden">Create Booking</span>
+          </button>
         </div>
 
         <div className="w-full max-w-full min-w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
