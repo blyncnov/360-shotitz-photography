@@ -142,7 +142,7 @@ const BookingsTable = () => {
                   <td className="px-6 py-4">23</td>
                   <td className="px-6 py-4">23/09/2024</td>
                   <td className="px-6 py-4">Plan Name</td>
-                  <td className="px-6 py-4">₦4,000</td>
+                  <td className="px-6 py-4">₦4,100</td>
                 </tr>
               );
             })}
