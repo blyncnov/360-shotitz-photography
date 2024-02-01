@@ -15,7 +15,7 @@ import GhostImage from "../../../../../public/ghost.jpeg";
 // Define the type  element (HTMLInputElement)
 type InputRefType = HTMLInputElement;
 
-const Profile = () => {
+const ProfilePage = () => {
   const router = useRouter();
 
   // BLOB: data URL
@@ -147,4 +147,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;
