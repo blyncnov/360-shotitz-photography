@@ -11,6 +11,7 @@ import ShotitZPhotographyLogo from "../../../../public/brand/dlogo.png";
 import { RiHome5Line } from "react-icons/ri";
 import { TbLogout } from "react-icons/tb";
 import { AiOutlineUser } from "react-icons/ai";
+import { GrGallery } from "react-icons/gr";
 import { MdOutlineLibraryBooks } from "react-icons/md";
 
 // Admin Store
@@ -43,7 +44,7 @@ const BucksSideBar = () => {
     >
       <div className="w-full max-w-full min-w-full min-h-[80px h-[80px] max-h-[80px] flex justify-start items-center border-gy border-b px-6">
         <Link
-          href="/admin"
+          href="/dashboard"
           onClick={ClosedashboarSidebar}
           className="text-center"
         >
@@ -60,7 +61,7 @@ const BucksSideBar = () => {
       <div className="relative w-full max-w-full min-w-full py-6 px-3">
         <div className="sidebar-items w-full flex flex-col gap-3 items-start justify-start text-dashboardText">
           <Link
-            href="/admin"
+            href="/dashboard"
             onClick={ClosedashboarSidebar}
             className="font-medium flex items-center gap-2 cursor-pointer py-3 px-4 w-full rounded hover:bg-dashboardGray"
           >
@@ -68,16 +69,23 @@ const BucksSideBar = () => {
             <p className=" text-[16px]">Home</p>
           </Link>
           <Link
-            href="/admin/bookings"
+            href="/dashboard/bookings"
             onClick={ClosedashboarSidebar}
             className="w-full font-normal flex items-center gap-2 cursor-pointer py-3 px-4 rounded hover:bg-dashboardGray"
           >
             <MdOutlineLibraryBooks className="text-xl " />
             <p className=" text-[16px]">Bookings</p>
           </Link>
-
           <Link
-            href="/admin/profile"
+            href="/dashboard/gallery"
+            onClick={ClosedashboarSidebar}
+            className="w-full font-normal flex items-center gap-2 cursor-pointer py-3 px-4 rounded hover:bg-dashboardGray"
+          >
+            <GrGallery className="text-xl " />
+            <p className=" text-[16px]">Gallery</p>
+          </Link>
+          <Link
+            href="/dashboard/profile"
             onClick={ClosedashboarSidebar}
             className="w-full font-normal flex items-center gap-2 cursor-pointer py-3 px-4 rounded hover:bg-dashboardGray"
           >
