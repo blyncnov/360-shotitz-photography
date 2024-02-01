@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 
 // STYLE: Gblobal Style
-import "../main.scss";
+import "../../main.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 

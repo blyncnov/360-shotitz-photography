@@ -8,7 +8,7 @@ import { IoNotifications } from "react-icons/io5";
 import { FaBars } from "react-icons/fa";
 
 // Admin Store
-import AdminStore from "../../../../store/store";
+import AdminStore from "../../../../../store/store";
 
 const AdminHeader = () => {
   // Close & Open dashboard Sidebar
