@@ -32,7 +32,7 @@ const BookingProcess = ({
   };
 
   return (
-    <div className="w-full fixed top-0 left-0 right-0 h-full bg-[black]/70 z-[9999999999] flex flex-col gap-6 justify-center items-center">
+    <div className="w-full min-h-[100vh] h-[100vh] overflow-y-scroll py-24 fixed top-0 left-0 right-0 bg-[black]/70 z-[9999999999] flex flex-col gap-6 justify-center items-center">
       <div className="relative bg-black w-[90%] md:w-[600px] rounded-lg p-3 min-h-[90dvh] px-4 md:px-10 py-6 pb-10 shadow-2xl flex gap-6 flex-col justify-start items-start">
         <div className="w-full flex flex-col gap-2">
           <div className="w-full">

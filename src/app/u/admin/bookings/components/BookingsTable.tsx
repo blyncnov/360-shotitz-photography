@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const BookingsTable = () => {
@@ -35,19 +36,31 @@ const BookingsTable = () => {
                   key={item}
                 >
                   <td className="flex gap-3 px-6 py-4 font-normal">
-                    <div className="text-sm">
-                      <h2 className="font-medium">Adeola Adewale</h2>
-                    </div>
+                    <Link href="bookings/user123">
+                      <div className="text-sm">
+                        <h2 className="font-medium">Adeola Adewale</h2>
+                      </div>
+                    </Link>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm">
-                      <h2 className="font-medium">08138395869</h2>
-                    </div>
+                    <Link href="bookings/user123">
+                      <div className="text-sm">
+                        <h2 className="font-medium">08138395869</h2>
+                      </div>
+                    </Link>
                   </td>
-                  <td className="px-6 py-4">23</td>
+
+                  <td className="px-6 py-4">
+                    <Link href="bookings/user123">23</Link>
+                  </td>
+
                   <td className="px-6 py-4">23/09/2024</td>
-                  <td className="px-6 py-4">Plan Name</td>
-                  <td className="px-6 py-4">₦4,000</td>
+                  <td className="px-6 py-4">
+                    <Link href="bookings/user123">Plan Name</Link>
+                  </td>
+                  <td className="px-6 py-4">
+                    <Link href="bookings/user123"> ₦4,000</Link>
+                  </td>
                 </tr>
               );
             })}
