@@ -73,8 +73,8 @@ const Testimonials = () => {
           </div>
         </div>
       </WhiteSpace>
-      <div className="w-[90%] mt-12">
-        <div className="w-full bg-[#090909] border border-l-0 border-[#fafafa2d] min-h-[300px] rounded-[0_12px_12px_0] py-6 pr-12 pl-6">
+      <div className="w-[90%] mt-12 md:mx-0 mx-auto">
+        <div className="w-full bg-[#090909] border md:border-l-0 border-l border-[#fafafa2d] min-h-[300px] rounded-[12px_12px] md:rounded-[0_12px_12px_0] py-6 pr-12 pl-6">
           <div className="w-full grid grid-cols-1 md:grid-cols-[0.4fr_0.6fr] gap-6">
             <div>
               <Image

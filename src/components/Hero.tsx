@@ -76,7 +76,7 @@ const HeroSection = () => {
           </div>
         </section>
       </WhiteSpace>
-      <div className="w-full bg-white text-black min-h-[250px] py-6">
+      {/* <div className="w-full bg-white text-black min-h-[250px] py-6">
         <WhiteSpace>
           <div className="relative">
             <h1 className="flex items-center gap-2">
@@ -96,7 +96,7 @@ const HeroSection = () => {
             </h1>
           </div>
         </WhiteSpace>
-      </div>
+      </div> */}
     </div>
   );
 };
