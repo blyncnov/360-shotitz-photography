@@ -10,7 +10,7 @@ const HeroSection = () => {
   return (
     <div className="w-full flex gap-2 flex-col">
       <WhiteSpace>
-        <section className="w-full grid grid-cols-[0.3fr_0.7fr] gap-6 pb-12">
+        <section className="w-full grid md:grid-cols-[0.3fr_0.7fr] grid-cols-1 gap-6 pb-12">
           <div className="w-full flex flex-col gap-3">
             <div className="w-full flex flex-col gap-2">
               <h1 className="text-5xl font-semibold text-primary">
@@ -24,11 +24,11 @@ const HeroSection = () => {
 
             <div className="w-full flex flex-col gap-2">
               <div className="w-full flex gap-12 my-4">
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-start justify-start">
                   <h2 className="text-3xl text-primary">1206+</h2>
                   <p>Happy Clients</p>
                 </div>
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-start justify-start">
                   <h2 className="text-3xl text-primary">10+</h2>
                   <p>Work Experience </p>
                 </div>
@@ -43,7 +43,7 @@ const HeroSection = () => {
               <SocialHandles />
             </div>
           </div>
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full md:block hidden">
             <div className="w-full h-full flex overflow-x-scroll no-scrollbar gap-12 items-center absolute -bottom-12 left-0 right-0 min-h-[450px]">
               {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((data, index) => {
                 return (

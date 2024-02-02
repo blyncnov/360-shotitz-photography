@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import PhotoAlbum from "react-photo-album";
 
 // Components
 import WhiteSpace from "@/components/WhiteSpace";
+import NextJsImage from "./NextJsImage";
+import photos from "@/data/photos";
 
 const Portfolio = () => {
   return (
@@ -23,66 +28,23 @@ const Portfolio = () => {
             </p>
           </div>
           <div className="w-full">
-            <div className="gallery">
-              <figure className="gallery__item gallery__item--1">
-                <Image
-                  src="/shoot1.jpeg"
-                  alt="Gallery image 1"
-                  className="w-full gallery__img"
-                  width={105}
-                  height={105}
-                />
-              </figure>
-              <figure className="gallery__item gallery__item--2">
-                <Image
-                  src="/shoot1.jpeg"
-                  alt="Gallery image 1"
-                  width={105}
-                  height={105}
-                  className="w-full gallery__img"
-                />
-              </figure>
-              <figure className="gallery__item gallery__item--3">
-                <Image
-                  src="/shoot1.jpeg"
-                  alt="Gallery image 1"
-                  width={105}
-                  height={105}
-                  className="w-full gallery__img"
-                />
-              </figure>
-              <figure className="gallery__item gallery__item--4">
-                <Image
-                  src="/shoot1.jpeg"
-                  alt="Gallery image 1"
-                  width={105}
-                  height={105}
-                  className="w-full gallery__img"
-                />
-              </figure>
-              <figure className="gallery__item gallery__item--5">
-                <Image
-                  src="/shoot1.jpeg"
-                  alt="Gallery image 1"
-                  width={105}
-                  height={105}
-                  className="w-full gallery__img"
-                />
-              </figure>
-              <figure className="gallery__item gallery__item--6">
-                <Image
-                  src="/shoot1.jpeg"
-                  alt="Gallery image 1"
-                  width={105}
-                  height={105}
-                  className="w-full gallery__img"
-                />
-              </figure>
-            </div>
+            <PhotographyGallery />
           </div>
         </div>
       </WhiteSpace>
     </div>
+  );
+};
+
+const PhotographyGallery = () => {
+  return (
+    <PhotoAlbum
+      layout="rows"
+      photos={photos}
+      renderPhoto={NextJsImage}
+      defaultContainerWidth={1200}
+      sizes={{ size: "calc(100vw - 240px)" }}
+    />
   );
 };
 
