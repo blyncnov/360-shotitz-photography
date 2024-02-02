@@ -10,7 +10,7 @@ const HeroSection = () => {
   return (
     <div className="w-full flex gap-2 flex-col">
       <WhiteSpace>
-        <section className="w-full grid md:grid-cols-[0.3fr_0.7fr] grid-cols-1 gap-6 pb-12">
+        <section className="w-full grid md:grid-cols-[0.4fr_0.6fr] grid-cols-1 gap-6 pb-12">
           <div className="w-full flex flex-col gap-3">
             <div className="w-full flex flex-col gap-2">
               <h1 className="text-5xl font-semibold text-primary">
