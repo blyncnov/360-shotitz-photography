@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Loader from "../../../Loader/Loader"
 import { userLogin } from "../../../services/request";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [loginDetails, setLoginDetails] = useState({
@@ -23,8 +24,9 @@ const LoginPage = () => {
     setChanging(!changing);
   };
 
-  useEffect(() => {
-    console.log(loginDetails);
+  const router = useRouter()
+
+  useEffect(() => {    
     if (loginDetails["email"] && loginDetails["password"]) {
       setValid(true);
     } else {
@@ -37,7 +39,7 @@ const LoginPage = () => {
     if (valid) {
       console.log("validating");
       setLoading(true);
-      await userLogin(loginDetails);
+      await userLogin(loginDetails, router);
       setLoading(false);
     }
   };

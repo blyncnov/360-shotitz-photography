@@ -11,6 +11,16 @@ interface registerProps {
   terms_agreement: boolean;
 }
 
+interface OTPDetails {
+  email: string;
+  otp: number;
+}
+
+interface loginProps {
+  email: string;
+  password: any;
+}
+
 function getCookie(cookieName: string) {
   const name = cookieName + "=";
   const decodedCookie = decodeURIComponent(document.cookie);
@@ -44,16 +54,43 @@ const setConfig = () => {
   return config;
 };
 
-export const userLogin = async (data: any) => {
+export const userLogin = async (data: loginProps, router: any) => {
   await axios
     .post(`${api}/auth/login/`, data, {
       withCredentials: true,
     })
     .then((response) => {
-      // document.cookie = "token=" + response.data.payload.token;
-      console.log(response)
-      if (response.data.payload) {
+      document.cookie = "token=" + response.data.data.access;
+  
+      if (response.data.status === "success") {
         console.log("authenticated user login");
+        notify(response.data.message);
+        router.push("/")
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+      console.log(err);
+    });
+};
+
+export const userRegistration = async (data: registerProps, router: any) => {
+  await axios
+    .post(`${api}/auth/register/`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    })
+    .then((response) => {
+      if (response.data.message) {
+        localStorage.setItem("userEmail", data.email);
+        console.log("authenticated user login");
+        router.push("/auth/otp");
       }
       notify(response.data.message);
     })
@@ -67,20 +104,20 @@ export const userLogin = async (data: any) => {
     });
 };
 
-export const userRegistration = async (data: registerProps) => {
+export const verifyOTP = async (data: OTPDetails, router: any) => {
   await axios
-    .post(`${api}/auth/register/`, data, {
+    .post(`${api}/auth/verify-email/`, data, {
       headers: {
         "Content-Type": "application/json",
       },
       withCredentials: true,
     })
     .then((response) => {
-      // document.cookie = "token=" + response.data.payload.token;
+      console.log(response);
       if (response.data.message) {
-        console.log("authenticated user login");
+        notify(response.data.message);
+        router.push("/auth/login");
       }
-      notify(response.data.message);
     })
     .catch((err) => {
       if (err.response.data.message) {

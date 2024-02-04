@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { userRegistration } from "@/services/request";
 import Loader from "@/Loader/Loader";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
   interface registerProps {
@@ -23,6 +24,8 @@ const RegisterPage = () => {
     }
   );
 
+  const router = useRouter()
+
   const [changing, setChanging] = useState(false);
   const [valid, setValid] = useState(false);
   const [pass, setPass] = useState("");
@@ -37,9 +40,7 @@ const RegisterPage = () => {
     setChanging(!changing);
   };
 
-  useEffect(() => {
-    console.log(registrationDetails);
-    console.log(pass)
+  useEffect(() => { 
     if (pass === registrationDetails["password"]) {
       setPasswordMatch(true);      
     } else {
@@ -58,11 +59,11 @@ const RegisterPage = () => {
   }, [changing]);
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
+    e.preventDefault();    
     if (valid && passwordMatch) {
       console.log("validating");
-      setLoading(true);
-      await userRegistration(registrationDetails);
+      setLoading(true);      
+      await userRegistration(registrationDetails, router);
       setLoading(false);
     } else {
       console.log("not Valid");
