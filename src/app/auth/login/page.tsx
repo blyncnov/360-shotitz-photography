@@ -1,7 +1,47 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Loader from "../../../Loader/Loader"
+import { userLogin } from "../../../services/request";
 
 const LoginPage = () => {
+  const [loginDetails, setLoginDetails] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [changing, setChanging] = useState(false);
+  const [valid, setValid] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: any) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setLoginDetails({ ...loginDetails, [name]: value });
+    setChanging(!changing);
+  };
+
+  useEffect(() => {
+    console.log(loginDetails);
+    if (loginDetails["email"] && loginDetails["password"]) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
+  }, [changing]);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (valid) {
+      console.log("validating");
+      setLoading(true);
+      await userLogin(loginDetails);
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="login-page w-full min-h-screen justify-center items-center flex">
       <div className="w-full max-w-[450px] bg-[#0F0F0F] rounded-2xl py-10 px-6">
@@ -11,13 +51,15 @@ const LoginPage = () => {
             Please enter your email and password
           </p>
         </div>
-        <form className="flex flex-col gap-4 mt-8">
+        <form className="flex flex-col gap-4 mt-8" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email_address">Email address</label>
             <input
               type="email"
               id="email_address"
-              name="email_address"
+              name="email"
+              value={loginDetails["email"]}
+              onChange={handleChange}
               placeholder="Enter your email address"
               className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
             />
@@ -28,6 +70,8 @@ const LoginPage = () => {
               type="password"
               id="password"
               name="password"
+              value={loginDetails["password"]}
+              onChange={handleChange}
               placeholder="Password"
               className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
             />
@@ -38,8 +82,13 @@ const LoginPage = () => {
             </Link>
           </div>
           <div className="w-full flex flex-col gap-2.5">
-            <button className="w-full min-h-12 bg-primary rounded-md mt-3">
-              Login
+            <button
+              className="w-full min-h-12 bg-primary rounded-md mt-3"
+              type="submit"
+            >
+              {
+                loading ? <Loader /> : "Login"
+              }              
             </button>
             <Link
               href="/auth/register"
