@@ -32,10 +32,11 @@ const DashboardHome = () => {
   };
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (refreshToken) {
       getRecentData();
     } else {
+      console.log("unAuthorized")
       window.location.pathname = "/auth/login";
     }
   }, []);

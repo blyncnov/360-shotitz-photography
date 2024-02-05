@@ -1,6 +1,7 @@
 import axios from "axios";
 import { notify, notifyError } from "./toastify";
 import { access } from "fs";
+import { error } from "console";
 
 const api = "https://shotitz-api.vercel.app/api/v1";
 
@@ -68,9 +69,10 @@ const refreshToken = async () => {
       }
     })
     .catch((err) => {
-      console.log("refresh error");      
+      console.log("refresh error");
       if (err.response.data.message) {
-        window.location.pathname = "/auth/login";
+        notifyError(err.response.data.message);
+        // window.location.pathname = "/auth/login";
       } else {
         notifyError("Network Error");
       }
@@ -106,7 +108,7 @@ axios.interceptors.response.use(
           return axios(updatedConfig);
           // return axios(error.config);
         } catch (refreshError) {
-          console.log("refresh error");          
+          console.log("refresh error");
           // Handle token refresh failure
           return Promise.reject(refreshError);
         }
