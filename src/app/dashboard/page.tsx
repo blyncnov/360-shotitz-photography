@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { getCookie, recentBookingsAndImages } from "@/services/request";
+import { recentBookingsAndImages } from "@/services/request";
 
 // Icons
 import { LuPlus } from "react-icons/lu";
@@ -26,14 +26,12 @@ const DashboardHome = () => {
     console.log("token: " + accessToken);
     if (accessToken) {
       await recentBookingsAndImages(accessToken);
+    } else {
+      await recentBookingsAndImages("string");
     }
   };
 
   useEffect(() => {
-    if (!getCookie("token")) {
-      console.log("unAuthorized");
-      router.push("/auth/login");
-    }
     getRecentData();
   }, []);
 
