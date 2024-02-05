@@ -68,9 +68,9 @@ const refreshToken = async () => {
       }
     })
     .catch((err) => {
-      console.log("refresh error");
+      console.log("refresh error");      
       if (err.response.data.message) {
-        notifyError(err.response.data.message);
+        window.location.pathname = "/auth/login";
       } else {
         notifyError("Network Error");
       }
@@ -85,35 +85,33 @@ axios.interceptors.response.use(
     return response;
   },
   async (error) => {
-    // If the error is a 401, attempt to refresh the token
-    if (error.response.status === 401 && !error.config._isRetry) {
-      try {
+    if (error.config.url !== "/auth/login/" && error.response) {
+      // If the error is a 401, attempt to refresh the token
+      if (error.response.status === 401 && !error.config._isRetry) {
         // Mark the request for retry to prevent an infinite loop
         error.config._isRetry = true;
+        try {
+          // Refresh the token
+          console.log("automatically refreshing token...");
+          await refreshToken();
 
-        // Refresh the token
-        console.log("automatically refreshing token...");
-        await refreshToken();
-        console.log(localStorage.getItem("refreshToken"));
-
-        const updatedConfig = {
-          ...error.config,
-          headers: {
-            ...error.config.headers,
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        };
-        // Retry the original request
-        return axios(updatedConfig);
-        // return axios(error.config);
-      } catch (refreshError) {
-        console.log("refresh error");
-        window.location.pathname = "/auth/login";
-        // Handle token refresh failure
-        return Promise.reject(refreshError);
+          const updatedConfig = {
+            ...error.config,
+            headers: {
+              ...error.config.headers,
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          };
+          // Retry the original request
+          return axios(updatedConfig);
+          // return axios(error.config);
+        } catch (refreshError) {
+          console.log("refresh error");          
+          // Handle token refresh failure
+          return Promise.reject(refreshError);
+        }
       }
     }
-
     // For other errors, reject the promise
     return Promise.reject(error);
   }

@@ -32,7 +32,12 @@ const DashboardHome = () => {
   };
 
   useEffect(() => {
-    getRecentData();
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      getRecentData();
+    } else {
+      window.location.pathname = "/auth/login";
+    }
   }, []);
 
   return (
