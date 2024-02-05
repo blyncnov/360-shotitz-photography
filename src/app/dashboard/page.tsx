@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { getCookie, recentBookingsAndImages } from "@/services/request";
 
 // Icons
 import { LuPlus } from "react-icons/lu";
@@ -10,10 +12,30 @@ import { CiMoneyBill } from "react-icons/ci";
 import { BsStars } from "react-icons/bs";
 import RecentBookingsEmptyState from "./components/Nothing";
 import BookingProcess from "./components/Bookings/BookingProcess";
+import { type } from "os";
 
 const DashboardHome = () => {
+  const [data, setData] = useState([]);
+
   const [isStartBookingProcess, setisStartBookingProcess] =
     useState<Boolean>(false);
+  const router = useRouter();
+
+  const getRecentData = async () => {
+    const accessToken = localStorage.getItem("accessToken");
+    console.log("token: " + accessToken);
+    if (accessToken) {
+      await recentBookingsAndImages(accessToken);
+    }
+  };
+
+  useEffect(() => {
+    if (!getCookie("token")) {
+      console.log("unAuthorized");
+      router.push("/auth/login");
+    }
+    getRecentData();
+  }, []);
 
   return (
     <>

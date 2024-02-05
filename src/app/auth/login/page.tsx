@@ -2,12 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Loader from "../../../Loader/Loader"
+import Loader from "../../../Loader/Loader";
 import { userLogin } from "../../../services/request";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
-  const [loginDetails, setLoginDetails] = useState({
+  interface loginProps {
+    email: string;
+    password: any;
+  }
+
+  const [loginDetails, setLoginDetails] = useState<loginProps>({
     email: "",
     password: "",
   });
@@ -24,9 +29,9 @@ const LoginPage = () => {
     setChanging(!changing);
   };
 
-  const router = useRouter()
+  const router = useRouter();
 
-  useEffect(() => {    
+  useEffect(() => {
     if (loginDetails["email"] && loginDetails["password"]) {
       setValid(true);
     } else {
@@ -88,9 +93,7 @@ const LoginPage = () => {
               className="w-full min-h-12 bg-primary rounded-md mt-3"
               type="submit"
             >
-              {
-                loading ? <Loader /> : "Login"
-              }              
+              {loading ? <Loader /> : "Login"}
             </button>
             <Link
               href="/auth/register"
