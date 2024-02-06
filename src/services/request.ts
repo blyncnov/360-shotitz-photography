@@ -170,6 +170,35 @@ export const userRegistration = async (data: registerProps, router: any) => {
     });
 };
 
+export const resetPasswordOTP = async (email: string, router: any) => {
+  await axios
+    .post(
+      `${api}/auth/send-password-reset-otp/`,
+      { email },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      console.log(response);
+      if (response.data.message) {
+        notify(response.data.message);
+        router.push("/auth/otp");
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+      console.log(err);
+    });
+};
+
 export const verifyOTP = async (data: OTPDetails, router: any) => {
   await axios
     .post(`${api}/auth/verify-email/`, data, {
@@ -195,12 +224,12 @@ export const verifyOTP = async (data: OTPDetails, router: any) => {
     });
 };
 
-export const logOutUser = async (accessToken: string) => {  
+export const logOutUser = async (accessToken: string) => {
   await axios
     .get(`${api}/auth/logout/`, setConfig(accessToken))
     .then((response) => {
       console.log(response);
-      if (response.data.status === "success") {        
+      if (response.data.status === "success") {
         console.log(response.data.message);
       }
     })
@@ -210,7 +239,7 @@ export const logOutUser = async (accessToken: string) => {
       } else {
         notifyError("Network Error");
       }
-    });  
+    });
 };
 
 export const recentBookingsAndImages = async (accessToken: string) => {
