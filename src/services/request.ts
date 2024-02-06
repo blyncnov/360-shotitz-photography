@@ -2,6 +2,7 @@ import axios from "axios";
 import { notify, notifyError } from "./toastify";
 import { access } from "fs";
 import { error } from "console";
+import { bookingSchema } from "@/app/dashboard/components/Interface";
 
 const api = "https://shotitz-api.vercel.app/api/v1";
 
@@ -219,6 +220,71 @@ export const retrieveAllUserBookings = async (accessToken: string) => {
   let result: any = [];
   await axios
     .get(`${api}/store/bookings/`, setConfig(accessToken))
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        result = response.data.data;
+        console.log(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+    });
+  return result;
+};
+
+export const createBookings = async (data: bookingSchema) => {
+  let result: any = [];
+  await axios
+    .post(`${api}/store/bookings/`, data, setConfig("accessToken"))
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        notify(response.data.message);
+        result = response.data.data;
+        console.log("bookings created");
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+      console.log(err);
+    });
+  return result;
+};
+
+export const getPhotos = async (accessToken: string) => {
+  let result: any = [];
+  await axios
+    .get(`${api}/profiles/photos/`, setConfig(accessToken))
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        result = response.data.data;
+        console.log(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+    });
+  return result;
+};
+
+export const retrieveProfile = async (accessToken: string) => {
+  let result: any = [];
+  await axios
+    .get(`${api}/profiles/`, setConfig(accessToken))
     .then((response) => {
       console.log(response);
       if (response.data.status === "success") {

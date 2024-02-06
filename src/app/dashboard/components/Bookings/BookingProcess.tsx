@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, Dispatch, SetStateAction } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { createBookings } from "@/services/request";
 
 // Icons
 import { FaTimes } from "react-icons/fa";
@@ -10,22 +11,59 @@ import BookingProcessOne from "./StepOne";
 import BookingProcessTwo from "./StepTwo";
 import BookingProcessThree from "./StepThree";
 import FinalStep from "./FinalStep";
+import { bookingSchema } from "../Interface";
+import Loader from "@/Loader/Loader";
 
 const BookingProcess = ({
   setisStartBookingProcess,
 }: {
   setisStartBookingProcess: Dispatch<SetStateAction<Boolean>>;
 }) => {
-  const [bookingInfo, setBookingInfo] = useState({});
+  const [bookingInfo, setBookingInfo] = useState<bookingSchema>({
+    phone: "",
+    plan: "SAPPHIRE",
+    shoot_type: "OUTDOOR",
+    number_of_shoot: 1,
+    location: "",
+    shooting_date: new Date().getTime.toString(),
+    shooting_time: "",
+  });
   const [bookingSteps, setBookingSteps] = useState(1);
+  const [valid, setValid] = useState(false);
+  const [changing, setChanging] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [bookings, setBookings] = useState([]);
 
-  const HandleBookingProcessSubmission = () => {
+  useEffect(() => {
+    if (
+      bookingInfo["phone"] &&
+      bookingInfo["plan"] &&
+      bookingInfo["shoot_type"] &&
+      bookingInfo["number_of_shoot"] &&
+      bookingInfo["location"] &&
+      bookingInfo["shooting_date"] &&
+      bookingInfo["shooting_time"]
+    ) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
+  }, [changing]);
+
+  const HandleBookingProcessSubmission = async () => {
+    setChanging(!changing);
+    let data = [];
     if (bookingSteps === 4) {
-      // TODO: CALL API TO MAKE BOOKINGS RATHER THAN CONSOLE LOGGING IT
-      console.log(bookingInfo);
-
-      // END BOOKING PROCESS
-      return setisStartBookingProcess(false);
+      if (valid) {
+        setLoading(true);
+        // TODO: CALL API TO MAKE BOOKINGS RATHER THAN CONSOLE LOGGING IT
+        data = await createBookings(bookingInfo);
+        console.log(data);
+        console.log(bookingInfo);
+        setLoading(false);
+        // END BOOKING PROCESS
+        return setisStartBookingProcess(false);
+      }
     } else {
       setBookingSteps(bookingSteps + 1);
     }
@@ -37,16 +75,28 @@ const BookingProcess = ({
         <div className="w-full flex flex-col gap-2">
           <div className="w-full">
             {bookingSteps === 1 && (
-              <BookingProcessOne setBookingInfo={setBookingInfo} />
+              <BookingProcessOne
+                setBookingInfo={setBookingInfo}
+                bookingInfo={bookingInfo}
+              />
             )}
             {bookingSteps === 2 && (
-              <BookingProcessTwo setBookingInfo={setBookingInfo} />
+              <BookingProcessTwo
+                bookingInfo={bookingInfo}
+                setBookingInfo={setBookingInfo}
+              />
             )}
             {bookingSteps === 3 && (
-              <BookingProcessThree setBookingInfo={setBookingInfo} />
+              <BookingProcessThree
+                bookingInfo={bookingInfo}
+                setBookingInfo={setBookingInfo}
+              />
             )}
             {bookingSteps === 4 && (
-              <FinalStep setBookingInfo={setBookingInfo} />
+              <FinalStep
+                bookingInfo={bookingInfo}
+                setBookingInfo={setBookingInfo}
+              />
             )}
 
             <button
@@ -56,7 +106,9 @@ const BookingProcess = ({
               {bookingSteps === 1 && "Make payment"}
               {bookingSteps === 2 && "Next"}
               {bookingSteps === 3 && "Next"}
-              {bookingSteps === 4 && "Completed"}
+              {loading
+                ? bookingSteps === 4 && <Loader />
+                : bookingSteps === 4 && "Completed"}
             </button>
           </div>
         </div>

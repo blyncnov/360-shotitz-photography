@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { getPhotos } from "@/services/request";
 
 // Icons
 import { IoArrowBackSharp } from "react-icons/io5";
@@ -11,6 +12,30 @@ import { IoArrowBackSharp } from "react-icons/io5";
 
 const Gallery = () => {
   const router = useRouter();
+  const [photos, setPhotos] = useState([])
+
+  const getAllPhotos = async () => {
+    let data;
+    const accessToken = localStorage.getItem("accessToken");
+    console.log("token: " + accessToken);
+    if (accessToken) {
+      data = await getPhotos(accessToken);
+      setPhotos(data);
+      console.log(data)
+    } else {
+      data = await getPhotos("string");
+    }
+  };
+
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("refreshToken");    
+    if (refreshToken) {
+      getAllPhotos();
+    } else {
+      console.log("unAuthorized");
+      window.location.pathname = "/auth/login";
+    }
+  }, []);
   return (
     <main className="w-full text-white max-w-full min-w-full grid grid-cols-1 gap-8">
       <div className="w-full max-w-full min-w-full flex justify-between items-center">

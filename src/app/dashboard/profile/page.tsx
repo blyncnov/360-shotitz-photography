@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { retrieveProfile } from "@/services/request";
 
 // Icons
 import { LuPlus } from "react-icons/lu";
@@ -18,6 +19,20 @@ type InputRefType = HTMLInputElement;
 const Profile = () => {
   const router = useRouter();
 
+  interface profileSchema {
+    first_name: string;
+    last_name: string;
+    email: string;
+    avatar: string;
+  }
+
+  //  Profile details
+  const [profile, setProfile] = useState<profileSchema>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    avatar: "",
+  });
   // BLOB: data URL
   const [dataImageURL, setDataImageURL] = useState<string | null>(null);
 
@@ -39,6 +54,30 @@ const Profile = () => {
     // Call API to upload image to database
   };
 
+  const getUserProfile = async () => {
+    let data = [];
+    const accessToken = localStorage.getItem("accessToken");
+    console.log("token: " + accessToken);
+    if (accessToken) {
+      data = await retrieveProfile(accessToken);
+      if (data) {        
+        setProfile(data);
+      }
+      console.log(profile);
+    } else {
+      data = await retrieveProfile("string");
+    }
+  };
+
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (refreshToken) {
+      getUserProfile();
+    } else {
+      console.log("unAuthorized");
+      window.location.pathname = "/auth/login";
+    }
+  }, []);
   return (
     <main className="w-full text-white max-w-full min-w-full grid grid-cols-1 gap-8">
       <div className="w-full max-w-full min-w-full">
@@ -74,7 +113,7 @@ const Profile = () => {
                     </div>
                   ) : (
                     <Image
-                      src={GhostImage}
+                      src={profile["avatar"] ? profile["avatar"] : GhostImage}
                       width={40}
                       height={40}
                       alt={`ghost Image`}
@@ -109,6 +148,7 @@ const Profile = () => {
                 <input
                   type="email"
                   name="email"
+                  value={profile["email"]}
                   placeholder="Email address"
                   className="w-full bg-transparent border border-gy text-gray-500 rounded-md min-h-12 mt-1.5 p-2"
                 />

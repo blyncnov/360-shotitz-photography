@@ -1,9 +1,12 @@
 import React from "react";
+import { bookingSchema } from "../Interface";
 
 const BookingProcessTwo = ({
   setBookingInfo,
+  bookingInfo,
 }: {
-  setBookingInfo: React.Dispatch<React.SetStateAction<{}>>;
+  setBookingInfo: React.Dispatch<React.SetStateAction<bookingSchema>>;
+  bookingInfo: bookingSchema;
 }) => {
   return (
     <div className="w-full flex flex-col gap-4">
