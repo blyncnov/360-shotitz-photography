@@ -195,6 +195,24 @@ export const verifyOTP = async (data: OTPDetails, router: any) => {
     });
 };
 
+export const logOutUser = async (accessToken: string) => {  
+  await axios
+    .get(`${api}/auth/logout/`, setConfig(accessToken))
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {        
+        console.log(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+    });  
+};
+
 export const recentBookingsAndImages = async (accessToken: string) => {
   let result: any = [];
   await axios

@@ -62,8 +62,7 @@ const Profile = () => {
       data = await retrieveProfile(accessToken);
       if (data) {        
         setProfile(data);
-      }
-      console.log(profile);
+      }      
     } else {
       data = await retrieveProfile("string");
     }
