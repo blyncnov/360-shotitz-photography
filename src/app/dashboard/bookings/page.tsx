@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { retrieveAllUserBookings } from "@/services/request";
 
 // Icons
 import { IoArrowBackSharp } from "react-icons/io5";
@@ -16,6 +17,29 @@ const Bookings = () => {
   const router = useRouter();
   const [isStartBookingProcess, setisStartBookingProcess] =
     useState<Boolean>(false);
+  const [bookings, setBookings] = useState([]);
+
+  const getRecentData = async () => {
+    let data;
+    const accessToken = localStorage.getItem("accessToken");
+    console.log("token: " + accessToken);
+    if (accessToken) {
+      data = await retrieveAllUserBookings(accessToken);
+      setBookings(data);
+    } else {
+      data = await retrieveAllUserBookings("string");
+    }
+  };
+
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (refreshToken) {
+      getRecentData();
+    } else {
+      console.log("unAuthorized");
+      window.location.pathname = "/auth/login";
+    }
+  }, []);
 
   return (
     <>

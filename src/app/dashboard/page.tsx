@@ -15,19 +15,20 @@ import BookingProcess from "./components/Bookings/BookingProcess";
 import { type } from "os";
 
 const DashboardHome = () => {
-  const [data, setData] = useState([]);
+  const [recentData, setRecentData] = useState([]);
 
   const [isStartBookingProcess, setisStartBookingProcess] =
     useState<Boolean>(false);
-  const router = useRouter();
 
   const getRecentData = async () => {
+    let data;
     const accessToken = localStorage.getItem("accessToken");
     console.log("token: " + accessToken);
     if (accessToken) {
-      await recentBookingsAndImages(accessToken);
+      data = await recentBookingsAndImages(accessToken);
+      setRecentData(data);
     } else {
-      await recentBookingsAndImages("string");
+      data = await recentBookingsAndImages("string");
     }
   };
 
@@ -36,7 +37,7 @@ const DashboardHome = () => {
     if (refreshToken) {
       getRecentData();
     } else {
-      console.log("unAuthorized")
+      console.log("unAuthorized");
       window.location.pathname = "/auth/login";
     }
   }, []);

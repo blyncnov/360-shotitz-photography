@@ -195,11 +195,13 @@ export const verifyOTP = async (data: OTPDetails, router: any) => {
 };
 
 export const recentBookingsAndImages = async (accessToken: string) => {
+  let result: any = [];
   await axios
     .get(`${api}/store/bookings-and-images/`, setConfig(accessToken))
     .then((response) => {
       console.log(response);
       if (response.data.status === "success") {
+        result = response.data.data;
         console.log(response.data.message);
       }
     })
@@ -210,4 +212,26 @@ export const recentBookingsAndImages = async (accessToken: string) => {
         notifyError("Network Error");
       }
     });
+  return result;
+};
+
+export const retrieveAllUserBookings = async (accessToken: string) => {
+  let result: any = [];
+  await axios
+    .get(`${api}/store/bookings/`, setConfig(accessToken))
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        result = response.data.data;
+        console.log(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+    });
+  return result;
 };
