@@ -1,7 +1,62 @@
+import FakeImage from "../../public/shoot1.jpeg";
+import { StaticImageData } from "next/image";
+
 const breakpoints = [1080, 640, 384, 256, 128, 96, 64, 48];
 
 const unsplashLink = (id: string, width: number, height: number) =>
   `https://source.unsplash.com/${id}/${width}x${height}`;
+
+export const PortfolioArrayPictures = [
+  {
+    id: 1,
+    picture: FakeImage,
+    category: "wedding",
+    width: 1080,
+    height: 800,
+  },
+  {
+    id: 2,
+    picture: FakeImage,
+    category: "wedding",
+    width: 1080,
+    height: 1620,
+  },
+  {
+    id: 3,
+    picture: FakeImage,
+    category: "events",
+    width: 1080,
+    height: 720,
+  },
+  {
+    id: 4,
+    picture: FakeImage,
+    category: "portraits",
+    width: 1080,
+    height: 721,
+  },
+  {
+    id: 5,
+    picture: FakeImage,
+    category: "portraits",
+    width: 1080,
+    height: 720,
+  },
+  {
+    id: 6,
+    picture: FakeImage,
+    category: "events",
+    width: 1080,
+    height: 1620,
+  },
+  {
+    id: 7,
+    picture: FakeImage,
+    category: "family",
+    width: 1080,
+    height: 607,
+  },
+];
 
 const unsplashPhotos = [
   { id: "8gVv6nxq6gY", width: 1080, height: 800 },
@@ -27,14 +82,14 @@ const unsplashPhotos = [
   { id: "xKhtkhc9HbQ", width: 1080, height: 1440 },
 ];
 
-const photos = unsplashPhotos.map((photo) => ({
-  src: unsplashLink(photo.id, photo.width, photo.height),
+const photos = PortfolioArrayPictures.map((photo) => ({
+  src: photo.picture,
   width: photo.width,
   height: photo.height,
   srcSet: breakpoints.map((breakpoint) => {
     const height = Math.round((photo.height / photo.width) * breakpoint);
     return {
-      src: unsplashLink(photo.id, breakpoint, height),
+      src: photo.picture,
       width: breakpoint,
       height,
     };

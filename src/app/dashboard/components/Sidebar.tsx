@@ -39,7 +39,7 @@ const BucksSideBar = () => {
     }
     localStorage.clear();
     // Redirect to login page
-    // router.push("/auth/login")
+    router.push("/auth/login")
     // location.reload();
   }
 

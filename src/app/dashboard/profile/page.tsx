@@ -148,6 +148,7 @@ const Profile = () => {
                   type="email"
                   name="email"
                   value={profile["email"]}
+                  readOnly
                   placeholder="Email address"
                   className="w-full bg-transparent border border-gy text-gray-500 rounded-md min-h-12 mt-1.5 p-2"
                 />
