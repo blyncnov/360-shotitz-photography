@@ -25,8 +25,8 @@ const DashboardHome = () => {
 
   const getRecentData = async () => {
     let data;
-    const accessToken = localStorage.getItem("accessToken");
-    console.log("token: " + accessToken);
+    const accessToken = localStorage.getItem("accessToken");    
+    console.log("accessToken: " + accessToken);    
     if (accessToken) {
       data = await recentBookingsAndImages(accessToken);
       if (data.recent_bookings) {

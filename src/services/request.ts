@@ -57,15 +57,15 @@ let count = 0;
 
 const refreshToken = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
+  console.log(refreshToken);
   count++;
-  if (count > 10) {
-    console.log("greater!!");
+  if (count > 5) {    
     window.location.pathname = "/auth/login";
   }
   await axios
     .post(
       `${api}/auth/refresh/`,
-      { refresh: refreshToken ? refreshToken : "string" },
+      { refresh: refreshToken },
       { withCredentials: true }
     )
     .then((response) => {
@@ -102,7 +102,6 @@ axios.interceptors.response.use(
       // If the error is a 401, attempt to refresh the token
       if (error.response.status === 401 && !error.config._isRetry) {
         // Mark the request for retry to prevent an infinite loop
-        count += 1;
         error.config._isRetry = true;
         try {
           // Refresh the token
