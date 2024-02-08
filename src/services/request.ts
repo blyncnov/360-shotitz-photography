@@ -233,6 +233,30 @@ export const verifyOTP = async (data: OTPDetails, router: any) => {
     });
 };
 
+export const resendVerificationOTP = async (data:any) => {
+  await axios
+    .post(`${api}/auth/resend-verification-email/`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log(response);
+      if (response.data.message) {
+        notify(response.data.message);        
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+      console.log(err);
+    });
+};
+
 export const logOutUser = async (accessToken: string) => {
   await axios
     .get(`${api}/auth/logout/`, setConfig(accessToken))

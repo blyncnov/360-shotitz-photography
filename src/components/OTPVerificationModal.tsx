@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
-import { verifyOTP } from "@/services/request";
+import { verifyOTP, resendVerificationOTP } from "@/services/request";
 import Loader from "@/Loader/Loader";
 import { useRouter } from "next/navigation";
 import OtpInput from "react-otp-input";
@@ -18,7 +18,8 @@ const OTPVerificationModal = ({
   const [email, setEmail] = useState("");
 
   const [loading, setLoading] = useState(false);
- 
+  const [sending, setSending] = useState(false);
+
   const router = useRouter();
 
   const handleOTPVerification = async (e: any) => {
@@ -29,6 +30,15 @@ const OTPVerificationModal = ({
       setLoading(false);
     } else {
       console.log("not valid");
+    }
+  };
+
+  const handleResendOTP = async (e: any) => {
+    e.preventDefault();
+    if (email) {
+      setSending(true);
+      await resendVerificationOTP({ email });
+      setSending(false);
     }
   };
 
@@ -83,8 +93,11 @@ const OTPVerificationModal = ({
             {loading ? <Loader /> : "Confirm OTP"}
           </button>
 
-          <button className="w-full min-h-12 border border-primary text-primary bg-transparent rounded-md mt-1">
-            Resend OTP
+          <button
+            className="w-full min-h-12 border border-primary text-primary bg-transparent rounded-md mt-1"
+            onClick={handleResendOTP}
+          >
+            {sending ? <Loader /> : "Resend OTP"}
           </button>
         </div>
 
