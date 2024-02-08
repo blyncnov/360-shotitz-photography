@@ -53,8 +53,15 @@ const setConfig = (accessToken: string) => {
   return config;
 };
 
+let count = 0;
+
 const refreshToken = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
+  count++;
+  if (count > 10) {
+    console.log("greater!!");
+    window.location.pathname = "/auth/login";
+  }
   await axios
     .post(
       `${api}/auth/refresh/`,
@@ -79,8 +86,6 @@ const refreshToken = async () => {
       console.log(err);
     });
 };
-
-let count = 0;
 
 axios.interceptors.response.use(
   (response) => {
@@ -119,12 +124,6 @@ axios.interceptors.response.use(
           // Handle token refresh failure
           return Promise.reject(refreshError);
         }
-      } else if (
-        error.response.status === 401 &&
-        count > 3 &&
-        error.config._isRetry
-      ) {
-        window.location.pathname = "/auth/login";
       }
     }
     // For other errors, reject the promise
@@ -157,7 +156,7 @@ export const userLogin = async (data: loginProps, router: any) => {
     });
 };
 
-export const userRegistration = async (data: registerProps, router: any) => {
+export const userRegistration = async (data: registerProps) => {
   await axios
     .post(`${api}/auth/register/`, data, {
       headers: {
@@ -168,7 +167,6 @@ export const userRegistration = async (data: registerProps, router: any) => {
     .then((response) => {
       if (response.data.message) {
         localStorage.setItem("userEmail", data.email);
-        router.push("/auth/otp");
       }
       notify(response.data.message);
     })
@@ -344,6 +342,48 @@ export const retrieveProfile = async (accessToken: string) => {
   let result: any = [];
   await axios
     .get(`${api}/profiles/`, setConfig(accessToken))
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        result = response.data.data;
+        console.log(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+    });
+  return result;
+};
+
+export const retrieveAvailablePlans = async (accessToken: string) => {
+  let result: any = [];
+  await axios
+    .get(`${api}/store/plans/`, setConfig(accessToken))
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        result = response.data.data;
+        console.log(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+    });
+  return result;
+};
+
+export const retrieveBankDetails = async (accessToken: string) => {
+  let result: any = [];
+  await axios
+    .get(`${api}/store/account-detail/`, setConfig(accessToken))
     .then((response) => {
       console.log(response);
       if (response.data.status === "success") {

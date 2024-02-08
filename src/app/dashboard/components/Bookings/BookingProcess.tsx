@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { createBookings } from "@/services/request";
+import { retrieveBankDetails } from "@/services/request";
 
 // Icons
 import { FaTimes } from "react-icons/fa";
@@ -11,7 +12,7 @@ import BookingProcessOne from "./StepOne";
 import BookingProcessTwo from "./StepTwo";
 import BookingProcessThree from "./StepThree";
 import FinalStep from "./FinalStep";
-import { bookingSchema } from "../Interface";
+import { bookingSchema, bankDetailsSchema } from "../Interface";
 import Loader from "@/Loader/Loader";
 
 const BookingProcess = ({
@@ -22,7 +23,7 @@ const BookingProcess = ({
   const [bookingInfo, setBookingInfo] = useState<bookingSchema>({
     phone: "",
     plan: "SAPPHIRE",
-    shoot_type: "OUTDOOR",    
+    shoot_type: "OUTDOOR",
     location: "",
     shooting_date: new Date().getTime.toString(),
     shooting_time: "",
@@ -31,13 +32,17 @@ const BookingProcess = ({
   const [valid, setValid] = useState(false);
   const [changing, setChanging] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [bookings, setBookings] = useState([]);
+  const [bankDetails, setBankDetails] = useState<bankDetailsSchema>({
+    account_name: "",
+    account_number: "",
+    bank_name: "",
+  });
 
   useEffect(() => {
     if (
       bookingInfo["phone"] &&
       bookingInfo["plan"] &&
-      bookingInfo["shoot_type"] &&      
+      bookingInfo["shoot_type"] &&
       bookingInfo["location"] &&
       bookingInfo["shooting_date"] &&
       bookingInfo["shooting_time"]
@@ -47,6 +52,31 @@ const BookingProcess = ({
       setValid(false);
     }
   }, [changing]);
+
+  const getBankDetails = async () => {
+    let data;
+    const accessToken = localStorage.getItem("accessToken");
+    console.log("token: " + accessToken);
+    if (accessToken) {
+      data = await retrieveBankDetails(accessToken);
+      if (data) {
+        setBankDetails(data);
+      }
+      console.log(data);
+    } else {
+      data = await retrieveBankDetails("string");
+    }
+  };
+
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (refreshToken) {
+      getBankDetails();
+    } else {
+      console.log("unAuthorized");
+      window.location.pathname = "/auth/login";
+    }
+  }, []);
 
   const HandleBookingProcessSubmission = async () => {
     setChanging(!changing);
@@ -90,12 +120,7 @@ const BookingProcess = ({
                 setBookingInfo={setBookingInfo}
               />
             )}
-            {bookingSteps === 4 && (
-              <FinalStep
-                bookingInfo={bookingInfo}
-                setBookingInfo={setBookingInfo}
-              />
-            )}
+            {bookingSteps === 4 && <FinalStep bankDetails={bankDetails} />}
 
             <button
               className="w-full min-h-12 bg-primary rounded-md mt-6"

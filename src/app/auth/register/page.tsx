@@ -34,6 +34,7 @@ const RegisterPage = () => {
   const [pass, setPass] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isRequestedOTP, setIsRequestedOTP] = useState<Boolean>(false);
 
   const handleChange = (e: any) => {
     let name = e.target.name;
@@ -66,14 +67,14 @@ const RegisterPage = () => {
     if (valid && passwordMatch) {
       console.log("validating");
       setLoading(true);
-      await userRegistration(registrationDetails, router);
+      await userRegistration(registrationDetails);
+      setIsRequestedOTP(true)
       setLoading(false);
     } else {
       console.log("not Valid");
     }
   };
-
-  const [isRequestedOTP, setIsRequestedOTP] = useState<Boolean>(true);
+  
   return (
     <>
       {isRequestedOTP && (

@@ -20,3 +20,17 @@ export interface fetchBookingSchema {
   shooting_date: string;
   shooting_time: string;
 }
+
+export interface bookingOverviewSchema {
+  images_total: number;
+  pending_bookings: number;
+  recent_bookings: fetchBookingSchema;
+  recently_viewed_images: any;
+  total_bookings: number;
+}
+
+export interface bankDetailsSchema {
+  account_name: string;
+  account_number: string;
+  bank_name: string;
+}

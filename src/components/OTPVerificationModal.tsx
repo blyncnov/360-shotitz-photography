@@ -1,6 +1,9 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import { verifyOTP } from "@/services/request";
+import Loader from "@/Loader/Loader";
+import { useRouter } from "next/navigation";
 import OtpInput from "react-otp-input";
 
 // Icons
@@ -11,11 +14,31 @@ const OTPVerificationModal = ({
 }: {
   setIsRequestedOTP: Dispatch<SetStateAction<Boolean>>;
 }) => {
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState(0);
+  const [email, setEmail] = useState("");
 
-  const handleOTPVerification = async () => {
-    alert(otp);
+  const [loading, setLoading] = useState(false);
+ 
+  const router = useRouter();
+
+  const handleOTPVerification = async (e: any) => {
+    e.preventDefault();
+    if (email && otp > 0) {
+      setLoading(true);
+      await verifyOTP({ email, otp }, router);
+      setLoading(false);
+    } else {
+      console.log("not valid");
+    }
   };
+
+  useEffect(() => {
+    const data = localStorage.getItem("userEmail");
+    console.log("email: " + data);
+    if (data !== null) {
+      setEmail(data);
+    }
+  }, []);
 
   return (
     <div className="w-full fixed top-0 left-0 right-0 h-full bg-[black]/90 z-[9999] flex flex-col gap-6 justify-center items-center !-mt-3">
@@ -26,8 +49,8 @@ const OTPVerificationModal = ({
               Reset Password
             </h2>
             <p className="text-sm font-light opacity-80 mt-3">
-              an <b>OTP</b> as been sent to <b>ajinaexample@gmail.com</b>, check
-              your email to confirm and click on resend if not found
+              an <b>OTP</b> has been sent to <b>{email}</b>, check your email to
+              confirm and click on resend if not found.
             </p>
           </div>
 
@@ -57,7 +80,7 @@ const OTPVerificationModal = ({
             className="w-full min-h-12 bg-primary rounded-md mt-3"
             onClick={handleOTPVerification}
           >
-            Confirm OTP
+            {loading ? <Loader /> : "Confirm OTP"}
           </button>
 
           <button className="w-full min-h-12 border border-primary text-primary bg-transparent rounded-md mt-1">

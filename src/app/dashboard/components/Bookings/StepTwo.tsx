@@ -1,5 +1,6 @@
 import React from "react";
 import { bookingSchema } from "../Interface";
+import Pricing from "@/components/Pricing";
 
 const BookingProcessTwo = ({
   setBookingInfo,
@@ -15,7 +16,7 @@ const BookingProcessTwo = ({
       </div>
 
       <div>
-        <h1>Pricing</h1>
+        <Pricing />
       </div>
     </div>
   );

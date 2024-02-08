@@ -33,7 +33,7 @@ const BookingProcessOne = ({
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           >
             <option value="outdoor">OUTDOOR</option>
-            <option value="outdoor">INDOOR</option>
+            <option value="indoor">INDOOR</option>
           </select>
         </div>
         <div>
