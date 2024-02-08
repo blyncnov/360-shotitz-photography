@@ -28,6 +28,7 @@ const BookingProcessOne = ({
           <select
             name="shoot_type"
             id="shoot_type"
+            value={bookingInfo["shoot_type"]}
             onChange={handleChange}
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           >
@@ -40,8 +41,7 @@ const BookingProcessOne = ({
           <input
             type="number"
             id="no_of_shoot"
-            name="number_of_shoot"
-            onChange={handleChange}
+            name="number_of_shoot"            
             placeholder="e.g 20"
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           />
@@ -53,6 +53,7 @@ const BookingProcessOne = ({
             type="text"
             id="location"
             name="location"
+            value={bookingInfo["location"]}
             onChange={handleChange}
             placeholder="e.g lagos"
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"

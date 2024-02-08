@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { retrieveAllUserBookings } from "@/services/request";
+import RecentBookingsEmptyState from "../components/Nothing";
 
 // Icons
 import { IoArrowBackSharp } from "react-icons/io5";
@@ -69,7 +70,15 @@ const Bookings = () => {
         </div>
 
         <div className="w-full">
-          <BookingsTable />
+        {bookings ? (
+            <>
+              <BookingsTable recentData={bookings} />
+            </>
+          ) : (
+            <div className="w-full my-6">
+              <RecentBookingsEmptyState />
+            </div>
+          )}
         </div>
       </main>
     </>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { recentBookingsAndImages } from "@/services/request";
+import BookingsTable from "./bookings/components/BookingsTable";
 
 // Icons
 import { LuPlus } from "react-icons/lu";
@@ -15,7 +16,7 @@ import BookingProcess from "./components/Bookings/BookingProcess";
 import { type } from "os";
 
 const DashboardHome = () => {
-  const [recentData, setRecentData] = useState([]);
+  const [recentData, setRecentData] = useState({});
 
   const [isStartBookingProcess, setisStartBookingProcess] =
     useState<Boolean>(false);
@@ -26,7 +27,8 @@ const DashboardHome = () => {
     console.log("token: " + accessToken);
     if (accessToken) {
       data = await recentBookingsAndImages(accessToken);
-      setRecentData(data);
+      setRecentData(data.recent_bookings);
+      console.log(data.recent_bookings);
     } else {
       data = await recentBookingsAndImages("string");
     }
@@ -186,10 +188,15 @@ const DashboardHome = () => {
               Recent Bookings
             </h1>
           </div>
-
-          <div className="w-full my-6">
-            <RecentBookingsEmptyState />
-          </div>
+          {recentData ? (
+            <>
+              <BookingsTable recentData={recentData} />
+            </>
+          ) : (
+            <div className="w-full my-6">
+              <RecentBookingsEmptyState />
+            </div>
+          )}
         </div>
       </div>
     </>

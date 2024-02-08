@@ -22,8 +22,7 @@ const BookingProcess = ({
   const [bookingInfo, setBookingInfo] = useState<bookingSchema>({
     phone: "",
     plan: "SAPPHIRE",
-    shoot_type: "OUTDOOR",
-    number_of_shoot: 1,
+    shoot_type: "OUTDOOR",    
     location: "",
     shooting_date: new Date().getTime.toString(),
     shooting_time: "",
@@ -38,8 +37,7 @@ const BookingProcess = ({
     if (
       bookingInfo["phone"] &&
       bookingInfo["plan"] &&
-      bookingInfo["shoot_type"] &&
-      bookingInfo["number_of_shoot"] &&
+      bookingInfo["shoot_type"] &&      
       bookingInfo["location"] &&
       bookingInfo["shooting_date"] &&
       bookingInfo["shooting_time"]

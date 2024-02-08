@@ -73,13 +73,14 @@ const refreshToken = async () => {
       console.log("refresh error");
       if (err.response.data.message) {
         notifyError(err.response.data.message);
-        // window.location.pathname = "/auth/login";
       } else {
         notifyError("Network Error");
       }
       console.log(err);
     });
 };
+
+let count = 0;
 
 axios.interceptors.response.use(
   (response) => {
@@ -88,10 +89,15 @@ axios.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.config.url !== "/auth/login/" && error.response) {
+    if (
+      error.config.url !== "/auth/login/" &&
+      error.config.url !== "/auth/register/" &&
+      error.response
+    ) {
       // If the error is a 401, attempt to refresh the token
       if (error.response.status === 401 && !error.config._isRetry) {
         // Mark the request for retry to prevent an infinite loop
+        count += 1;
         error.config._isRetry = true;
         try {
           // Refresh the token
@@ -113,6 +119,12 @@ axios.interceptors.response.use(
           // Handle token refresh failure
           return Promise.reject(refreshError);
         }
+      } else if (
+        error.response.status === 401 &&
+        count > 3 &&
+        error.config._isRetry
+      ) {
+        window.location.pathname = "/auth/login";
       }
     }
     // For other errors, reject the promise
