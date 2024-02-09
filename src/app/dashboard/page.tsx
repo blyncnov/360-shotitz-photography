@@ -22,7 +22,7 @@ const DashboardHome = () => {
 
   const [isStartBookingProcess, setisStartBookingProcess] =
     useState<Boolean>(false);
-
+  
   const getRecentData = async () => {
     let data;
     const accessToken = localStorage.getItem("accessToken");    

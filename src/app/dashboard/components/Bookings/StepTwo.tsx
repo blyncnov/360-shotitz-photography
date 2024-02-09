@@ -1,13 +1,15 @@
 import React from "react";
 import { bookingSchema } from "../Interface";
-import Pricing from "@/components/Pricing";
+import Pricing from "./Pricing";
 
 const BookingProcessTwo = ({
   setBookingInfo,
   bookingInfo,
+  pricingPlan,
 }: {
   setBookingInfo: React.Dispatch<React.SetStateAction<bookingSchema>>;
   bookingInfo: bookingSchema;
+  pricingPlan: any;
 }) => {
   return (
     <div className="w-full flex flex-col gap-4">
@@ -16,7 +18,7 @@ const BookingProcessTwo = ({
       </div>
 
       <div>
-        <Pricing />
+        <Pricing setBookingInfo={setBookingInfo} bookingInfo={bookingInfo} pricingPlan={pricingPlan} />
       </div>
     </div>
   );

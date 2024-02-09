@@ -1,15 +1,46 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // Icons
 import { CiMoneyBill } from "react-icons/ci";
 import { BsStars } from "react-icons/bs";
+import { adminBookingOverviewSchema } from "@/app/dashboard/components/Interface";
+import { retrieveAllUserBookings } from "@/services/adminRequest";
 
 // Components
 // import RecentBookingsEmptyState from "./components/Nothing";
 
 const DashboardHome = () => {
+  const [allBookings, setAllBookings] = useState([]);
+  const [overviewData, setOverviewData] =
+    useState<adminBookingOverviewSchema>();
+
+  const getRecentData = async () => {
+    let data;
+    const accessToken = localStorage.getItem("adminAccessToken");
+    console.log("adminAccessToken: " + accessToken);
+    if (accessToken) {
+      data = await retrieveAllUserBookings(accessToken);
+      if (data.delivered_bookings) {
+        setAllBookings(data.delivered_bookings);
+      }
+      setOverviewData(data);
+      console.log(data.delivered_bookings);
+    } else {
+      data = await retrieveAllUserBookings("string");
+    }
+  };
+
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("adminRefreshToken");
+    if (refreshToken) {
+      getRecentData();
+    } else {
+      console.log("unAuthorized");
+      window.location.pathname = "/auth/login";
+    }
+  }, []);
   return (
     <>
       <div className="w-full text-white max-w-full min-w-full grid grid-cols-1 gap-8">
@@ -27,8 +58,10 @@ const DashboardHome = () => {
                 <CiMoneyBill />
               </div>
               <div className="w-auto flex flex-col gap-1">
-                <h1 className="text-xl font-semibold">Total Bookings</h1>
-                <p className="text-xl font-normal opacity-50">$30</p>
+                <h1 className="text-xl font-semibold">Pending Bookings</h1>
+                <p className="text-xl font-normal opacity-50">
+                  {overviewData ? overviewData.pending_bookings.length : 0}
+                </p>
               </div>
             </div>
           </section>
@@ -40,8 +73,10 @@ const DashboardHome = () => {
               </div>
 
               <div className="w-auto flex flex-col gap-1">
-                <h1 className="text-xl font-semibold">Pending Bookings</h1>
-                <p className="text-xl font-normal opacity-50">$30</p>
+                <h1 className="text-xl font-semibold">Processing Bookings</h1>
+                <p className="text-xl font-normal opacity-50">
+                  {overviewData ? overviewData.processing_bookings.length : 0}
+                </p>
               </div>
             </div>
           </section>
@@ -53,10 +88,12 @@ const DashboardHome = () => {
                 <BsStars />
               </div>
               <div className="w-auto flex flex-col gap-1">
-                <h1 className="text-2xl font-semibold opacity-85">
-                  Gallery Image
+                <h1 className="text-xl font-semibold opacity-85">
+                  Completed Bookings
                 </h1>
-                <p className="text-xl font-normal opacity-50">$30</p>
+                <p className="text-xl font-normal opacity-50">
+                  {overviewData ? overviewData.delivered_bookings.length : 0}
+                </p>
               </div>
             </div>
           </section>

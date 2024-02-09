@@ -2,7 +2,10 @@
 
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { createBookings } from "@/services/request";
-import { retrieveBankDetails } from "@/services/request";
+import {
+  retrieveBankDetails,
+  retrieveAvailablePlans,
+} from "@/services/request";
 
 // Icons
 import { FaTimes } from "react-icons/fa";
@@ -38,6 +41,8 @@ const BookingProcess = ({
     bank_name: "",
   });
 
+  const [pricingPlan, setPricingPlan] = useState([]);
+
   useEffect(() => {
     if (
       bookingInfo["phone"] &&
@@ -68,10 +73,26 @@ const BookingProcess = ({
     }
   };
 
+  const getAvailablePlans = async () => {
+    let data;
+    const accessToken = localStorage.getItem("accessToken");
+    console.log("token: " + accessToken);
+    if (accessToken) {
+      data = await retrieveAvailablePlans(accessToken);
+      if (data) {
+        setPricingPlan(data);
+      }
+      console.log(data);
+    } else {
+      data = await retrieveAvailablePlans("string");
+    }
+  };
+
   useEffect(() => {
     const refreshToken = localStorage.getItem("refreshToken");
     if (refreshToken) {
       getBankDetails();
+      getAvailablePlans();
     } else {
       console.log("unAuthorized");
       window.location.pathname = "/auth/login";
@@ -110,6 +131,7 @@ const BookingProcess = ({
             )}
             {bookingSteps === 2 && (
               <BookingProcessTwo
+                pricingPlan={pricingPlan}
                 bookingInfo={bookingInfo}
                 setBookingInfo={setBookingInfo}
               />

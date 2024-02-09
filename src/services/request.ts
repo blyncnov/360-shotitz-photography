@@ -2,27 +2,14 @@ import axios from "axios";
 import { notify, notifyError } from "./toastify";
 import { access } from "fs";
 import { error } from "console";
-import { bookingSchema } from "@/app/dashboard/components/Interface";
+import {
+  bookingSchema,
+  loginProps,
+  registerProps,
+  OTPDetails,
+} from "@/app/dashboard/components/Interface";
 
 const api = "https://shotitz-api.vercel.app/api/v1";
-
-interface registerProps {
-  first_name: string;
-  last_name: string;
-  email: string;
-  password: any;
-  terms_agreement: boolean;
-}
-
-interface OTPDetails {
-  email: string;
-  otp: number;
-}
-
-interface loginProps {
-  email: string;
-  password: any;
-}
 
 // export function getCookie(cookieName: string) {
 //   const name = cookieName + "=";
@@ -41,7 +28,7 @@ interface loginProps {
 //   return null; // Return null if the cookie is not found
 // }
 
-const setConfig = (accessToken: string) => {
+export const setConfig = (accessToken: string) => {
   const config = {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -53,13 +40,31 @@ const setConfig = (accessToken: string) => {
   return config;
 };
 
+export const setProfileConfig = (accessToken: string) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "multipart/form-data",
+    },
+    withCredentials: true,
+  };
+
+  return config;
+};
+
 let count = 0;
 
 const refreshToken = async () => {
-  const refreshToken = localStorage.getItem("refreshToken");
+  const Type = localStorage.getItem("Type");
+  let refreshToken;
+  if (Type === "client") {
+    refreshToken = localStorage.getItem("refreshToken");
+  } else if (Type === "admin") {
+    refreshToken = localStorage.getItem("adminRefreshToken");
+  }
   console.log(refreshToken);
   count++;
-  if (count > 5) {    
+  if (count > 5) {
     window.location.pathname = "/auth/login";
   }
   await axios
@@ -70,8 +75,13 @@ const refreshToken = async () => {
     )
     .then((response) => {
       if (response.data.status === "success") {
-        localStorage.setItem("refreshToken", response.data.data.refresh);
-        localStorage.setItem("accessToken", response.data.data.access);
+        if (Type === "client") {
+          localStorage.setItem("refreshToken", response.data.data.refresh);
+          localStorage.setItem("accessToken", response.data.data.access);
+        } else if (Type === "admin") {
+          localStorage.setItem("adminRefreshToken", response.data.data.refresh);
+          localStorage.setItem("adminAccessToken", response.data.data.access);
+        }
         console.log(response);
         notify(response.data.message);
       }
@@ -105,14 +115,17 @@ axios.interceptors.response.use(
         error.config._isRetry = true;
         try {
           // Refresh the token
+          const Type = localStorage.getItem("Type");
           console.log("automatically refreshing token...");
           await refreshToken();
-
+          console.log(Type);
           const updatedConfig = {
             ...error.config,
             headers: {
               ...error.config.headers,
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              Authorization: `Bearer ${localStorage.getItem(
+                Type === "client" ? "accessToken" : "adminAccessToken"
+              )}`,
             },
           };
           // Retry the original request
@@ -233,7 +246,7 @@ export const verifyOTP = async (data: OTPDetails, router: any) => {
     });
 };
 
-export const resendVerificationOTP = async (data:any) => {
+export const resendVerificationOTP = async (data: any) => {
   await axios
     .post(`${api}/auth/resend-verification-email/`, data, {
       headers: {
@@ -244,7 +257,7 @@ export const resendVerificationOTP = async (data:any) => {
     .then((response) => {
       console.log(response);
       if (response.data.message) {
-        notify(response.data.message);        
+        notify(response.data.message);
       }
     })
     .catch((err) => {
@@ -380,6 +393,26 @@ export const retrieveProfile = async (accessToken: string) => {
       }
     });
   return result;
+};
+
+export const updateProfile = async (data: any) => {
+  await axios
+    .patch(`${api}/profiles/`, data, setProfileConfig("accessToken"))
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        notify(response.data.message);
+        console.log(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+      console.log(err);
+    });
 };
 
 export const retrieveAvailablePlans = async (accessToken: string) => {

@@ -27,7 +27,7 @@ const config: Config = {
         gy: "#3C3C3C",
       },
     },
-  },
+  },  
   plugins: [],
 };
 export default config;

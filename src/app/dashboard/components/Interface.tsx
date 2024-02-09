@@ -29,8 +29,38 @@ export interface bookingOverviewSchema {
   total_bookings: number;
 }
 
+export interface adminBookingOverviewSchema {
+  pending_bookings: Array<[]>;
+  delivered_bookings: Array<[]>;
+  processing_bookings: Array<[]>;
+}
+
 export interface bankDetailsSchema {
   account_name: string;
   account_number: string;
   bank_name: string;
+}
+
+export interface registerProps {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: any;
+  terms_agreement: boolean;
+}
+
+export interface OTPDetails {
+  email: string;
+  otp: number;
+}
+
+export interface loginProps {
+  email: string;
+  password: any;
+}
+
+export interface planSchema {
+  name: string;
+  price: string;
+  desc: string
 }

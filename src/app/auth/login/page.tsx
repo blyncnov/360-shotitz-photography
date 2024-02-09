@@ -5,6 +5,7 @@ import Link from "next/link";
 import Loader from "../../../Loader/Loader";
 import { userLogin } from "../../../services/request";
 import { useRouter } from "next/navigation";
+import { adminLogin } from "@/services/adminRequest";
 
 const LoginPage = () => {
   interface loginProps {
@@ -44,7 +45,13 @@ const LoginPage = () => {
     if (valid) {
       console.log("validating");
       setLoading(true);
-      await userLogin(loginDetails, router);
+      if (loginDetails["email"] === "testadmin@email.com") {
+        localStorage.setItem("Type", "admin")
+        await adminLogin(loginDetails, router);
+      } else {
+        localStorage.setItem("Type", "client")
+        await userLogin(loginDetails, router);
+      }
       setLoading(false);
     }
   };
