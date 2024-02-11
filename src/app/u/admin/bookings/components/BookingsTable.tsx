@@ -1,11 +1,13 @@
 import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/navigation";
 
-const BookingsTable = ({allBookings}:{allBookings:any}) => {
+const BookingsTable = ({ allBookings }: { allBookings: any }) => {
+  const router = useRouter();
   return (
     <>
       <div className="overflow-hidden rounded-lg text-white shadow-md">
-      <table className="w-full border-collapse bg-transparent text-left text-sm text-white">
+        <table className="w-full border-collapse bg-transparent text-left text-sm text-white">
           <thead>
             <tr>
               <th scope="col" className="px-6 py-4 font-medium text-lg">
@@ -28,12 +30,15 @@ const BookingsTable = ({allBookings}:{allBookings:any}) => {
               </th>
             </tr>
           </thead>
-          <tbody className="w-full  border-gray-100 opacity-70 ">
+          <tbody className="w-full border-gray-100 opacity-70 ">
             {allBookings?.map((item: any, index: any) => {
               return (
                 <tr
                   className="w-full hover:bg-[white]/10 cursor-pointer"
                   key={index}
+                  onClick={() => {
+                    router.push(`/u/admin/bookings/${item?.id}`);
+                  }}
                 >
                   <td className="flex gap-3 px-6 py-4 font-normal">
                     <div className="text-sm">

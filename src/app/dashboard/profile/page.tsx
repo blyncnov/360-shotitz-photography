@@ -34,8 +34,6 @@ const Profile = () => {
     email: "",
     avatar: "",
   });
-  // BLOB: data URL
-  const [dataImageURL, setDataImageURL] = useState<string | null>(null);
 
   // Create target REF
   const upload_ref = useRef<InputRefType>(null);
@@ -112,7 +110,7 @@ const Profile = () => {
             <div className="flex">
               <div onClick={UploadFileHandler} className="relative w-auto">
                 <div className="relative flex flex-col">
-                  {profile["avatar"] !== null ? (
+                  {profile["avatar"] ? (
                     <div className="relative w-auto transition-all rounded flex items-center justify-center">
                       <Image
                         src={profile["avatar"]}
@@ -148,14 +146,7 @@ const Profile = () => {
                         }}
                       />
                     </div>
-                  </div>
-                  {/* <input
-                    type="file"
-                    ref={upload_ref}
-                    name="upload_profile_pics"
-                    style={{ display: "none" }} // To Hide Input:File
-                    onChange={OnChangeUploadFile}
-                  /> */}
+                  </div>                  
                 </div>
               </div>
             </div>

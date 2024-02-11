@@ -54,8 +54,8 @@ export const retrieveAllUserBookings = async (accessToken: string) => {
 };
 
 export const retrieveBookingDetails = async (
-  id: string,
-  accessToken: string
+  accessToken: string,
+  id: string
 ) => {
   let result: any = [];
   await axios
@@ -127,9 +127,7 @@ export const deliverImages = async (data: any, id: string) => {
     });
 };
 
-export const adminDashboardDetails = async (  
-  accessToken: string
-) => {
+export const adminDashboardDetails = async (accessToken: string) => {
   let result: any = [];
   await axios
     .get(`${api}/admin/dashboard/`, setConfig(accessToken))
