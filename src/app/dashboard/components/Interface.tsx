@@ -30,9 +30,11 @@ export interface bookingOverviewSchema {
 }
 
 export interface adminBookingOverviewSchema {
-  pending_bookings: Array<[]>;
-  delivered_bookings: Array<[]>;
-  processing_bookings: Array<[]>;
+  pending_bookings: number;
+  completed_bookings: number;
+  processing_bookings: number;
+  recent_bookings: Array<[]>;
+  recently_delivered: Array<[]>;
 }
 
 export interface bankDetailsSchema {
@@ -62,5 +64,5 @@ export interface loginProps {
 export interface planSchema {
   name: string;
   price: string;
-  desc: string
+  desc: string;
 }

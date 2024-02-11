@@ -6,14 +6,16 @@ import React, { useState, useEffect } from "react";
 import { CiMoneyBill } from "react-icons/ci";
 import { BsStars } from "react-icons/bs";
 import { adminBookingOverviewSchema } from "@/app/dashboard/components/Interface";
-import { retrieveAllUserBookings } from "@/services/adminRequest";
+import {
+  retrieveAllUserBookings,
+  adminDashboardDetails,
+} from "@/services/adminRequest";
 
 // Components
 // import RecentBookingsEmptyState from "./components/Nothing";
 
 const DashboardHome = () => {
-  const [allBookings, setAllBookings] = useState([]);
-  const [overviewData, setOverviewData] =
+  const [adminDetails, setAdminDetails] =
     useState<adminBookingOverviewSchema>();
 
   const getRecentData = async () => {
@@ -21,14 +23,13 @@ const DashboardHome = () => {
     const accessToken = localStorage.getItem("adminAccessToken");
     console.log("adminAccessToken: " + accessToken);
     if (accessToken) {
-      data = await retrieveAllUserBookings(accessToken);
-      if (data.delivered_bookings) {
-        setAllBookings(data.delivered_bookings);
-      }
-      setOverviewData(data);
-      console.log(data.delivered_bookings);
+      data = await adminDashboardDetails(accessToken);
+      if (data) {
+        setAdminDetails(data);
+      }      
+      console.log(data.recent_bookings);
     } else {
-      data = await retrieveAllUserBookings("string");
+      data = await adminDashboardDetails("string");
     }
   };
 
@@ -60,7 +61,7 @@ const DashboardHome = () => {
               <div className="w-auto flex flex-col gap-1">
                 <h1 className="text-xl font-semibold">Pending Bookings</h1>
                 <p className="text-xl font-normal opacity-50">
-                  {overviewData ? overviewData.pending_bookings.length : 0}
+                  {adminDetails ? adminDetails.pending_bookings : 0}
                 </p>
               </div>
             </div>
@@ -75,7 +76,7 @@ const DashboardHome = () => {
               <div className="w-auto flex flex-col gap-1">
                 <h1 className="text-xl font-semibold">Processing Bookings</h1>
                 <p className="text-xl font-normal opacity-50">
-                  {overviewData ? overviewData.processing_bookings.length : 0}
+                  {adminDetails ? adminDetails.processing_bookings : 0}
                 </p>
               </div>
             </div>
@@ -92,7 +93,7 @@ const DashboardHome = () => {
                   Completed Bookings
                 </h1>
                 <p className="text-xl font-normal opacity-50">
-                  {overviewData ? overviewData.delivered_bookings.length : 0}
+                  {adminDetails ? adminDetails.completed_bookings : 0}
                 </p>
               </div>
             </div>
@@ -112,7 +113,7 @@ const DashboardHome = () => {
           </div>
 
           <div>
-            <BookingsTable />
+            <BookingsTable recentBookings={adminDetails?.recent_bookings} />
           </div>
         </div>
 
@@ -124,7 +125,7 @@ const DashboardHome = () => {
           </div>
 
           <div>
-            <BookingsTable />
+            <BookingsTable recentBookings={adminDetails?.recently_delivered} />
           </div>
         </div>
       </div>
@@ -132,7 +133,7 @@ const DashboardHome = () => {
   );
 };
 
-const BookingsTable = () => {
+const BookingsTable = ({ recentBookings }: { recentBookings: any }) => {  
   return (
     <>
       <div className="overflow-hidden rounded-lg text-white shadow-md">
@@ -160,15 +161,15 @@ const BookingsTable = () => {
             </tr>
           </thead>
           <tbody className="w-full  border-gray-100 opacity-70 ">
-            {[1, 2, 3, 4].map((item) => {
+            {recentBookings?.map((item: any, index: any) => {
               return (
                 <tr
                   className="w-full hover:bg-[white]/10 cursor-pointer"
-                  key={item}
+                  key={index}
                 >
                   <td className="flex gap-3 px-6 py-4 font-normal">
                     <div className="text-sm">
-                      <h2 className="font-medium">Adeola Adewale</h2>
+                      <h2 className="font-medium">{item?.name}</h2>
                     </div>
                   </td>
                   <td className="px-6 py-4">
@@ -176,10 +177,10 @@ const BookingsTable = () => {
                       <h2 className="font-medium">08138395869</h2>
                     </div>
                   </td>
-                  <td className="px-6 py-4">23</td>
-                  <td className="px-6 py-4">23/09/2024</td>
-                  <td className="px-6 py-4">Plan Name</td>
-                  <td className="px-6 py-4">₦4,000</td>
+                  <td className="px-6 py-4">{item?.number_of_shoot}</td>
+                  <td className="px-6 py-4">{item?.shooting_date}</td>
+                  <td className="px-6 py-4">{item?.plan}</td>
+                  <td className="px-6 py-4">₦{item?.price}</td>
                 </tr>
               );
             })}

@@ -7,7 +7,6 @@ import { setConfig } from "./request";
 
 const api = "https://shotitz-api.vercel.app/api/v1";
 
-
 export const adminLogin = async (data: loginProps, router: any) => {
   await axios
     .post(`${api}/auth/login/`, data, {
@@ -37,6 +36,103 @@ export const retrieveAllUserBookings = async (accessToken: string) => {
   let result: any = [];
   await axios
     .get(`${api}/admin/bookings/`, setConfig(accessToken))
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        result = response.data.data;
+        console.log(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+    });
+  return result;
+};
+
+export const retrieveBookingDetails = async (
+  id: string,
+  accessToken: string
+) => {
+  let result: any = [];
+  await axios
+    .get(`${api}/admin/bookings/${id}/`, setConfig(accessToken))
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        result = response.data.data;
+        console.log(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+    });
+  return result;
+};
+
+export const updateBooking = async (data: any, id: string) => {
+  await axios
+    .patch(`${api}/bookings/${id}/`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        console.log(response.data.message);
+        notify(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+      console.log(err);
+    });
+};
+
+export const deliverImages = async (data: any, id: string) => {
+  await axios
+    .patch(`${api}/deliver/${id}/`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        console.log(response.data.message);
+        notify(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        notifyError(err.response.data.message);
+      } else {
+        notifyError("Network Error");
+      }
+      console.log(err);
+    });
+};
+
+export const adminDashboardDetails = async (  
+  accessToken: string
+) => {
+  let result: any = [];
+  await axios
+    .get(`${api}/admin/dashboard/`, setConfig(accessToken))
     .then((response) => {
       console.log(response);
       if (response.data.status === "success") {
