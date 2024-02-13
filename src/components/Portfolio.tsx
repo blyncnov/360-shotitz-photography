@@ -104,13 +104,13 @@ const Portfolio = () => {
               </ul>
             </div>
 
-            <PhotoAlbum
+            {/* <PhotoAlbum
               layout="rows"
               photos={pictureArray}
               renderPhoto={NextJsImage}
               defaultContainerWidth={1200}
               sizes={{ size: "calc(100vw - 240px)" }}
-            />
+            /> */}
           </div>
         </div>
       </WhiteSpace>
