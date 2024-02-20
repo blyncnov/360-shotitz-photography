@@ -1,20 +1,16 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/qufjpohi/repositories/360-shotitz-photography1
-    - /bin/cp -R images $DEPLOYPATH
-    
-    - name: Install dependencies
-      command: npm install
-      path: /home/qufjpohi/repositories/360-shotitz-photography1 
+tasks:
+  - name: Copy images directory
+    command: /bin/cp -R images /home/qufjpohi/repositories/360-shotitz-photography1
+    path: /home/qufjpohi/repositories/360-shotitz-photography1
 
-    - name: Build production assets
-      command: npm run build
-      path: /home/qufjpohi/repositories/360-shotitz-photography1 
+  - name: Install dependencies
+    command: npm install
+    path: /home/qufjpohi/repositories/360-shotitz-photography1 
 
+  - name: Build production assets
+    command: npm run build
+    path: /home/qufjpohi/repositories/360-shotitz-photography1 
 
-    - name: Restart application
-      command: touch tmp/restart.txt
-      path: /home/qufjpohi/repositories/360-shotitz-photography1 
-
-
+  - name: Restart application
+    command: touch tmp/restart.txt
+    path: /home/qufjpohi/repositories/360-shotitz-photography1 
