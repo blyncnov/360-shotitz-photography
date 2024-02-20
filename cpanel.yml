@@ -2,13 +2,16 @@ deployment:
   tasks:
     - name: Install dependencies
       command: npm install
-      path: public_html
+      path: /home/qufjpohi/repositories/360-shotitz-photography1 
+
 
     - name: Build production assets
       command: npm run build
-      path: public_html
+      path: /home/qufjpohi/repositories/360-shotitz-photography1 
+
 
     - name: Restart application
       command: touch tmp/restart.txt
-      path: public_html
+      path: /home/qufjpohi/repositories/360-shotitz-photography1 
+
 
