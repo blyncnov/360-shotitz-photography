@@ -1,9 +1,12 @@
+---
 deployment:
   tasks:
+    - export DEPLOYPATH=/home/qufjpohi/repositories/360-shotitz-photography1
+    - /bin/cp -R images $DEPLOYPATH
+    
     - name: Install dependencies
       command: npm install
       path: /home/qufjpohi/repositories/360-shotitz-photography1 
-
 
     - name: Build production assets
       command: npm run build
