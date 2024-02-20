@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { retrieveProfile, updateProfile } from "@/services/request";
+import FileBase64 from "react-file-base64";
 
 // Icons
 import { LuPlus } from "react-icons/lu";
@@ -17,26 +19,73 @@ type InputRefType = HTMLInputElement;
 const ProfilePage = () => {
   const router = useRouter();
 
-  // BLOB: data URL
-  const [dataImageURL, setDataImageURL] = useState<string | null>(null);
+  interface profileSchema {
+    first_name: string;
+    last_name: string;
+    email: string;
+    avatar: string;
+  }
+
+  //  Profile details
+  const [profile, setProfile] = useState<profileSchema>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    avatar: "",
+  });
 
   // Create target REF
   const upload_ref = useRef<InputRefType>(null);
 
   // Upload Image With Preview
   const UploadFileHandler = () => {
-    if (upload_ref.current) {
-      return upload_ref.current.click();
-    }
+    return upload_ref.current?.click();
   };
 
   // OnUpload Image
-  const OnChangeUploadFile = (e: any) => {
-    const file = e.target.files[0];
-    setDataImageURL(URL.createObjectURL(file));
-
-    // Call API to upload image to database
+  const OnChangeUploadFile = async (base64: any) => {
+    if (
+      base64.type === "image/png" ||
+      base64.type === "image/jpg" ||
+      base64.type === "image/jpeg" ||
+      base64.type === "image/jfif"
+    ) {
+      setProfile({ ...profile, avatar: base64.base64 });
+      // Call API to upload image to database
+      updateProfile({
+        first_name: profile.first_name,
+        last_name: profile.last_name,
+        avatar: base64.file,
+      });
+      console.log(profile);
+    }
+    console.log(base64);
   };
+
+  const getUserProfile = async () => {
+    let data = [];
+    const accessToken = localStorage.getItem("adminAccessToken");
+    console.log("token: " + accessToken);
+    if (accessToken) {
+      data = await retrieveProfile(accessToken);
+      console.log(data);
+      if (data) {
+        setProfile(data);
+      }
+    } else {
+      data = await retrieveProfile("string");
+    }
+  };
+
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("adminRefreshToken");
+    if (refreshToken) {
+      getUserProfile();
+    } else {
+      console.log("unAuthorized");
+      window.location.pathname = "/auth/login";
+    }
+  }, []);
 
   return (
     <main className="w-full text-white max-w-full min-w-full grid grid-cols-1 gap-8">
@@ -61,10 +110,10 @@ const ProfilePage = () => {
             <div className="flex">
               <div onClick={UploadFileHandler} className="relative w-auto">
                 <div className="relative flex flex-col">
-                  {dataImageURL !== null ? (
+                  {profile["avatar"] ? (
                     <div className="relative w-auto transition-all rounded flex items-center justify-center">
                       <Image
-                        src={dataImageURL}
+                        src={profile["avatar"]}
                         width={40}
                         height={40}
                         alt={`Profile Image`}
@@ -83,16 +132,21 @@ const ProfilePage = () => {
                   <div className="absolute -bottom-2 -right-2 bg-[var(--primary-color)] shadow-md rounded-lg text-3xl p-1.5 flex items-center justify-center cursor-pointer">
                     <LuPlus
                       className="text-xl cursor-pointer text-white"
-                      onClick={UploadFileHandler}
+                      // onClick={UploadFileHandler}
                     />
+                    <div className="absolute opacity-0">
+                      <FileBase64
+                        name="cover"
+                        defaultValue={
+                          profile["avatar"] ? profile.avatar : GhostImage
+                        }
+                        multiple={false}
+                        onDone={(base64: any) => {
+                          OnChangeUploadFile(base64);
+                        }}
+                      />
+                    </div>
                   </div>
-                  <input
-                    type="file"
-                    ref={upload_ref}
-                    name="upload_profile_pics"
-                    style={{ display: "none" }} // To Hide Input:File
-                    onChange={OnChangeUploadFile}
-                  />
                 </div>
               </div>
             </div>
@@ -108,6 +162,8 @@ const ProfilePage = () => {
                 <input
                   type="email"
                   name="email"
+                  value={profile["email"]}
+                  readOnly
                   placeholder="Email address"
                   className="w-full bg-transparent border border-gy text-gray-500 rounded-md min-h-12 mt-1.5 p-2"
                 />

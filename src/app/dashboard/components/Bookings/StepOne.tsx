@@ -1,12 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
+import { bookingSchema } from "../Interface";
 
 const BookingProcessOne = ({
   setBookingInfo,
+  bookingInfo,
 }: {
-  setBookingInfo: React.Dispatch<React.SetStateAction<{}>>;
+  setBookingInfo: React.Dispatch<React.SetStateAction<bookingSchema>>;
+  bookingInfo: bookingSchema;
 }) => {
+  const handleChange = (e: any) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setBookingInfo({ ...bookingInfo, [name]: value });
+  };
   return (
     <div className="w-full flex flex-col gap-4">
       <div className="w-full flex flex-col gap-2">
@@ -29,7 +37,9 @@ const BookingProcessOne = ({
           <input
             type="number"
             id="Phone_number"
-            name="Phone_number"
+            name="phone"
+            value={bookingInfo["phone"]}
+            onChange={handleChange}
             placeholder="+2348149055068"
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           />
@@ -40,7 +50,9 @@ const BookingProcessOne = ({
           <input
             type="date"
             id="date"
-            name="date"
+            name="shooting_date"
+            value={bookingInfo["shooting_date"]}
+            onChange={handleChange}
             placeholder={new Date().getTime.toString()}
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           />
@@ -50,7 +62,9 @@ const BookingProcessOne = ({
           <input
             type="time"
             id="time"
-            name="time"
+            name="shooting_time"
+            value={bookingInfo["shooting_time"]}
+            onChange={handleChange}
             placeholder={new Date().getTime.toString()}
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           />

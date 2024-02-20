@@ -1,7 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/navigation";
 
-const BookingsTable = () => {
+const BookingsTable = ({ allBookings }: { allBookings: any }) => {
+  const router = useRouter();
   return (
     <>
       <div className="overflow-hidden rounded-lg text-white shadow-md">
@@ -28,39 +30,30 @@ const BookingsTable = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="w-full  border-gray-100 opacity-70 ">
-            {[1, 2, 3, 4].map((item) => {
+          <tbody className="w-full border-gray-100 opacity-70 ">
+            {allBookings?.map((item: any, index: any) => {
               return (
                 <tr
                   className="w-full hover:bg-[white]/10 cursor-pointer"
-                  key={item}
+                  key={index}
+                  onClick={() => {
+                    router.push(`/u/admin/bookings/${item?.id}`);
+                  }}
                 >
                   <td className="flex gap-3 px-6 py-4 font-normal">
-                    <Link href="bookings/user123">
-                      <div className="text-sm">
-                        <h2 className="font-medium">Adeola Adewale</h2>
-                      </div>
-                    </Link>
+                    <div className="text-sm">
+                      <h2 className="font-medium">{item?.name}</h2>
+                    </div>
                   </td>
                   <td className="px-6 py-4">
-                    <Link href="bookings/user123">
-                      <div className="text-sm">
-                        <h2 className="font-medium">08138395869</h2>
-                      </div>
-                    </Link>
+                    <div className="text-sm">
+                      <h2 className="font-medium">08138395869</h2>
+                    </div>
                   </td>
-
-                  <td className="px-6 py-4">
-                    <Link href="bookings/user123">23</Link>
-                  </td>
-
-                  <td className="px-6 py-4">23/09/2024</td>
-                  <td className="px-6 py-4">
-                    <Link href="bookings/user123">Plan Name</Link>
-                  </td>
-                  <td className="px-6 py-4">
-                    <Link href="bookings/user123"> ₦4,000</Link>
-                  </td>
+                  <td className="px-6 py-4">{item?.number_of_shoot}</td>
+                  <td className="px-6 py-4">{item?.shooting_date}</td>
+                  <td className="px-6 py-4">{item?.plan}</td>
+                  <td className="px-6 py-4">₦{item?.price}</td>
                 </tr>
               );
             })}

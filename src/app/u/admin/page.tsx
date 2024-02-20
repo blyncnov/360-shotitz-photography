@@ -1,15 +1,47 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // Icons
 import { CiMoneyBill } from "react-icons/ci";
 import { BsStars } from "react-icons/bs";
+import { adminBookingOverviewSchema } from "@/app/dashboard/components/Interface";
+import {
+  retrieveAllUserBookings,
+  adminDashboardDetails,
+} from "@/services/adminRequest";
 
 // Components
 // import RecentBookingsEmptyState from "./components/Nothing";
 
 const DashboardHome = () => {
+  const [adminDetails, setAdminDetails] =
+    useState<adminBookingOverviewSchema>();
+
+  const getRecentData = async () => {
+    let data;
+    const accessToken = localStorage.getItem("adminAccessToken");
+    console.log("adminAccessToken: " + accessToken);
+    if (accessToken) {
+      data = await adminDashboardDetails(accessToken);
+      if (data) {
+        setAdminDetails(data);
+      }      
+      console.log(data.recent_bookings);
+    } else {
+      data = await adminDashboardDetails("string");
+    }
+  };
+
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("adminRefreshToken");
+    if (refreshToken) {
+      getRecentData();
+    } else {
+      console.log("unAuthorized");
+      window.location.pathname = "/auth/login";
+    }
+  }, []);
   return (
     <>
       <div className="w-full text-white max-w-full min-w-full grid grid-cols-1 gap-8">
@@ -27,8 +59,10 @@ const DashboardHome = () => {
                 <CiMoneyBill />
               </div>
               <div className="w-auto flex flex-col gap-1">
-                <h1 className="text-xl font-semibold">Total Bookings</h1>
-                <p className="text-xl font-normal opacity-50">$30</p>
+                <h1 className="text-xl font-semibold">Pending Bookings</h1>
+                <p className="text-xl font-normal opacity-50">
+                  {adminDetails ? adminDetails.pending_bookings : 0}
+                </p>
               </div>
             </div>
           </section>
@@ -40,8 +74,10 @@ const DashboardHome = () => {
               </div>
 
               <div className="w-auto flex flex-col gap-1">
-                <h1 className="text-xl font-semibold">Pending Bookings</h1>
-                <p className="text-xl font-normal opacity-50">$30</p>
+                <h1 className="text-xl font-semibold">Processing Bookings</h1>
+                <p className="text-xl font-normal opacity-50">
+                  {adminDetails ? adminDetails.processing_bookings : 0}
+                </p>
               </div>
             </div>
           </section>
@@ -53,10 +89,12 @@ const DashboardHome = () => {
                 <BsStars />
               </div>
               <div className="w-auto flex flex-col gap-1">
-                <h1 className="text-2xl font-semibold opacity-85">
-                  Gallery Image
+                <h1 className="text-xl font-semibold opacity-85">
+                  Completed Bookings
                 </h1>
-                <p className="text-xl font-normal opacity-50">$30</p>
+                <p className="text-xl font-normal opacity-50">
+                  {adminDetails ? adminDetails.completed_bookings : 0}
+                </p>
               </div>
             </div>
           </section>
@@ -75,7 +113,7 @@ const DashboardHome = () => {
           </div>
 
           <div>
-            <BookingsTable />
+            <BookingsTable recentBookings={adminDetails?.recent_bookings} />
           </div>
         </div>
 
@@ -87,7 +125,7 @@ const DashboardHome = () => {
           </div>
 
           <div>
-            <BookingsTable />
+            <BookingsTable recentBookings={adminDetails?.recently_delivered} />
           </div>
         </div>
       </div>
@@ -95,7 +133,7 @@ const DashboardHome = () => {
   );
 };
 
-const BookingsTable = () => {
+const BookingsTable = ({ recentBookings }: { recentBookings: any }) => {  
   return (
     <>
       <div className="overflow-hidden rounded-lg text-white shadow-md">
@@ -123,15 +161,15 @@ const BookingsTable = () => {
             </tr>
           </thead>
           <tbody className="w-full  border-gray-100 opacity-70 ">
-            {[1, 2, 3, 4].map((item) => {
+            {recentBookings?.map((item: any, index: any) => {
               return (
                 <tr
                   className="w-full hover:bg-[white]/10 cursor-pointer"
-                  key={item}
+                  key={index}
                 >
                   <td className="flex gap-3 px-6 py-4 font-normal">
                     <div className="text-sm">
-                      <h2 className="font-medium">Adeola Adewale</h2>
+                      <h2 className="font-medium">{item?.name}</h2>
                     </div>
                   </td>
                   <td className="px-6 py-4">
@@ -139,10 +177,10 @@ const BookingsTable = () => {
                       <h2 className="font-medium">08138395869</h2>
                     </div>
                   </td>
-                  <td className="px-6 py-4">23</td>
-                  <td className="px-6 py-4">23/09/2024</td>
-                  <td className="px-6 py-4">Plan Name</td>
-                  <td className="px-6 py-4">₦4,000</td>
+                  <td className="px-6 py-4">{item?.number_of_shoot}</td>
+                  <td className="px-6 py-4">{item?.shooting_date}</td>
+                  <td className="px-6 py-4">{item?.plan}</td>
+                  <td className="px-6 py-4">₦{item?.price}</td>
                 </tr>
               );
             })}

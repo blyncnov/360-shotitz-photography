@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 // Icons
@@ -8,9 +8,42 @@ import { IoArrowBackSharp } from "react-icons/io5";
 
 // Components
 import BookingsTable from "./components/BookingsTable";
+import { retrieveAllUserBookings } from "@/services/adminRequest";
+import { adminBookingOverviewSchema } from "@/app/dashboard/components/Interface";
 
 const Bookings = () => {
   const router = useRouter();
+  const [allBookings, setAllBookings] = useState<any>([]);
+
+  const getAllBookings = async () => {
+    let data;
+    const accessToken = localStorage.getItem("adminAccessToken");
+    console.log("adminAccessToken: " + accessToken);
+    if (accessToken) {
+      data = await retrieveAllUserBookings(accessToken);
+      if (data) {
+        setAllBookings(
+          [].concat(
+            ...data.pending_bookings,
+            ...data.processing_bookings,
+            ...data.delivered_bookings
+          )
+        );
+      }      
+    } else {
+      data = await retrieveAllUserBookings("string");
+    }
+  };
+
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("adminRefreshToken");
+    if (refreshToken) {
+      getAllBookings();
+    } else {
+      console.log("unAuthorized");
+      window.location.pathname = "/auth/login";
+    }
+  }, []);
 
   return (
     <>
@@ -28,7 +61,7 @@ const Bookings = () => {
         </div>
 
         <div className="w-full">
-          <BookingsTable />
+          <BookingsTable allBookings={allBookings}/>
         </div>
       </main>
     </>

@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { recentBookingsAndImages } from "@/services/request";
+import BookingsTable from "./bookings/components/BookingsTable";
+import { bookingOverviewSchema } from "./components/Interface";
 
 // Icons
 import { LuPlus } from "react-icons/lu";
@@ -10,10 +14,40 @@ import { CiMoneyBill } from "react-icons/ci";
 import { BsStars } from "react-icons/bs";
 import RecentBookingsEmptyState from "./components/Nothing";
 import BookingProcess from "./components/Bookings/BookingProcess";
+import { type } from "os";
 
 const DashboardHome = () => {
+  const [recentData, setRecentData] = useState([]);
+  const [overviewData, setOverviewData] = useState<bookingOverviewSchema>();
+
   const [isStartBookingProcess, setisStartBookingProcess] =
     useState<Boolean>(false);
+  
+  const getRecentData = async () => {
+    let data;
+    const accessToken = localStorage.getItem("accessToken");    
+    console.log("accessToken: " + accessToken);    
+    if (accessToken) {
+      data = await recentBookingsAndImages(accessToken);
+      if (data.recent_bookings) {
+        setRecentData(data.recent_bookings);
+      }
+      setOverviewData(data);
+      console.log(data.recent_bookings);
+    } else {
+      data = await recentBookingsAndImages("string");
+    }
+  };
+
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (refreshToken) {
+      getRecentData();
+    } else {
+      console.log("unAuthorized");
+      window.location.pathname = "/auth/login";
+    }
+  }, []);
 
   return (
     <>
@@ -45,7 +79,9 @@ const DashboardHome = () => {
               </div>
               <div className="w-auto flex flex-col gap-1">
                 <h1 className="text-xl font-semibold">Total Bookings</h1>
-                <p className="text-xl font-normal opacity-50">$30</p>
+                <p className="text-xl font-normal opacity-50">
+                  {overviewData ? overviewData.total_bookings : 0}
+                </p>
               </div>
             </div>
           </section>
@@ -58,7 +94,9 @@ const DashboardHome = () => {
 
               <div className="w-auto flex flex-col gap-1">
                 <h1 className="text-xl font-semibold">Pending Bookings</h1>
-                <p className="text-xl font-normal opacity-50">$30</p>
+                <p className="text-xl font-normal opacity-50">
+                  {overviewData ? overviewData.pending_bookings : 0}
+                </p>
               </div>
             </div>
           </section>
@@ -73,7 +111,9 @@ const DashboardHome = () => {
                 <h1 className="text-2xl font-semibold opacity-85">
                   Gallery Image
                 </h1>
-                <p className="text-xl font-normal opacity-50">$30</p>
+                <p className="text-xl font-normal opacity-50">
+                  {overviewData ? overviewData.images_total : 0}
+                </p>
               </div>
             </div>
           </section>
@@ -159,10 +199,15 @@ const DashboardHome = () => {
               Recent Bookings
             </h1>
           </div>
-
-          <div className="w-full my-6">
-            <RecentBookingsEmptyState />
-          </div>
+          {recentData.length > 0 ? (
+            <>
+              <BookingsTable recentData={recentData} />
+            </>
+          ) : (
+            <div className="w-full my-6">
+              <RecentBookingsEmptyState />
+            </div>
+          )}
         </div>
       </div>
     </>

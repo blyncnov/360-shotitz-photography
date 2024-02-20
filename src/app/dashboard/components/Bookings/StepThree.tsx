@@ -1,12 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { bookingSchema } from "../Interface";
 
 const BookingProcessOne = ({
   setBookingInfo,
+  bookingInfo,
 }: {
-  setBookingInfo: React.Dispatch<React.SetStateAction<{}>>;
-}) => {
+  setBookingInfo: React.Dispatch<React.SetStateAction<bookingSchema>>;
+  bookingInfo: bookingSchema;
+}) => {  
+  const handleChange = (e: any) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setBookingInfo({ ...bookingInfo, [name]: value });
+  };
+  
   return (
     <div className="w-full flex flex-col gap-4">
       <div className="w-full flex flex-col gap-2">
@@ -19,9 +28,12 @@ const BookingProcessOne = ({
           <select
             name="shoot_type"
             id="shoot_type"
+            value={bookingInfo["shoot_type"]}
+            onChange={handleChange}
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           >
-            <option value="outdoor">Outdoor</option>
+            <option value="outdoor">OUTDOOR</option>
+            <option value="indoor">INDOOR</option>
           </select>
         </div>
         <div>
@@ -29,7 +41,7 @@ const BookingProcessOne = ({
           <input
             type="number"
             id="no_of_shoot"
-            name="no_of_shoot"
+            name="number_of_shoot"            
             placeholder="e.g 20"
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           />
@@ -41,6 +53,8 @@ const BookingProcessOne = ({
             type="text"
             id="location"
             name="location"
+            value={bookingInfo["location"]}
+            onChange={handleChange}
             placeholder="e.g lagos"
             className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
           />
