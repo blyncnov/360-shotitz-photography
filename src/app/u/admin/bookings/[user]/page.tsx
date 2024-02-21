@@ -51,7 +51,7 @@ const UserProfile = () => {
   const [isDelivering, setisDelivering] = useState<Boolean>(false);
   return (
     <>
-      {isDelivering && <DeliverImage setisDelivering={setisDelivering} />}
+      {isDelivering && <DeliverImage setisDelivering={setisDelivering} deliveredBookings={userBookingDetails?.delivered_bookings}/>}
 
       <div className="w-full text-white max-w-full min-w-full grid grid-cols-1 gap-8">
         <div className="w-full flex flex-col gap-4">
