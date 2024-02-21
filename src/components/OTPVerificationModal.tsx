@@ -14,7 +14,7 @@ const OTPVerificationModal = ({
 }: {
   setIsRequestedOTP: Dispatch<SetStateAction<Boolean>>;
 }) => {
-  const [otp, setOtp] = useState(0);
+  const [otp, setOtp] = useState<string>("0");
   const [email, setEmail] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const OTPVerificationModal = ({
 
   const handleOTPVerification = async (e: any) => {
     e.preventDefault();
-    if (email && otp > 0) {
+    if (email && otp !== "") {
       setLoading(true);
       await verifyOTP({ email, otp }, router);
       setLoading(false);

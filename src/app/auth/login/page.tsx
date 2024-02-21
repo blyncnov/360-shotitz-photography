@@ -46,10 +46,10 @@ const LoginPage = () => {
       console.log("validating");
       setLoading(true);
       if (loginDetails["email"] === "testadmin@email.com") {
-        localStorage.setItem("Type", "admin")
+        localStorage.setItem("Type", "admin");
         await adminLogin(loginDetails, router);
       } else {
-        localStorage.setItem("Type", "client")
+        localStorage.setItem("Type", "client");
         await userLogin(loginDetails, router);
       }
       setLoading(false);

@@ -53,7 +53,7 @@ export interface registerProps {
 
 export interface OTPDetails {
   email: string;
-  otp: number;
+  otp: number | string;
 }
 
 export interface loginProps {
