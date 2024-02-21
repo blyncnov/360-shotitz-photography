@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef, Dispatch, SetStateAction } from "react";
+import FileBase64 from "react-file-base64";
+import { deliverImages } from "@/services/adminRequest";
+import Loader from "@/Loader/Loader";
 
 // Icons
 import { FaTimes } from "react-icons/fa";
@@ -15,35 +18,55 @@ import GhostImage from "../../../../../../public/ghost.jpeg";
 type InputRefType = HTMLInputElement;
 
 const DeliverImage = ({
+  deliveredBookings,
   setisDelivering,
 }: {
+  deliveredBookings: any;
   setisDelivering: Dispatch<SetStateAction<Boolean>>;
 }) => {
-  const router = useRouter();
-
-  // BLOB: data URL
-  const [dataImageURL, setDataImageURL] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  //  Profile details
+  const [deliveries, setDeliveries] = useState<any>({
+    project_name: "",
+    date_time: "",
+    project_url: "",
+    avatar: "",
+  });
 
   // Create target REF
   const upload_ref = useRef<InputRefType>(null);
 
   // Upload Image With Preview
   const UploadFileHandler = () => {
-    if (upload_ref.current) {
-      return upload_ref.current.click();
-    }
+    return upload_ref.current?.click();
   };
 
   // OnUpload Image
-  const OnChangeUploadFile = (e: any) => {
-    const file = e.target.files[0];
-    setDataImageURL(URL.createObjectURL(file));
-
-    // Call API to upload image to database
+  const OnChangeUploadFile = async (base64: any) => {
+    if (
+      base64.type === "image/png" ||
+      base64.type === "image/jpg" ||
+      base64.type === "image/jpeg" ||
+      base64.type === "image/jfif"
+    ) {
+      setDeliveries({ ...deliveries, avatar: base64.base64 });
+      // Call API to upload image to database
+    }
+    console.log(base64);
   };
 
-  const HandleDelivery = () => {
+  const HandleDelivery = async () => {
     // TODO: CALL API TO Deliver Image
+    if (deliveries.project_url) {
+      console.log(deliveries);
+      setLoading(true);
+      await deliverImages(
+        { url: [deliveries.project_url] },
+        deliveredBookings.id
+      );
+      setLoading(false);
+      // setisDelivering(false)
+    }
   };
 
   return (
@@ -64,10 +87,10 @@ const DeliverImage = ({
                       className="relative w-auto"
                     >
                       <div className="relative flex flex-col">
-                        {dataImageURL !== null ? (
+                        {deliveries.avatar ? (
                           <div className="relative w-auto transition-all rounded flex items-center justify-center">
                             <Image
-                              src={dataImageURL}
+                              src={deliveries.avatar}
                               width={40}
                               height={40}
                               alt={`Profile Image`}
@@ -86,16 +109,23 @@ const DeliverImage = ({
                         <div className="absolute -bottom-2 -right-2 bg-[var(--primary-color)] shadow-md rounded-lg text-3xl p-1.5 flex items-center justify-center cursor-pointer">
                           <LuPlus
                             className="text-xl cursor-pointer text-white"
-                            onClick={UploadFileHandler}
+                            // onClick={UploadFileHandler}
                           />
+                          <div className="absolute opacity-0">
+                            <FileBase64
+                              name="cover"
+                              defaultValue={
+                                deliveries["avatar"]
+                                  ? deliveries.avatar
+                                  : GhostImage
+                              }
+                              multiple={false}
+                              onDone={(base64: any) => {
+                                OnChangeUploadFile(base64);
+                              }}
+                            />
+                          </div>{" "}
                         </div>
-                        <input
-                          type="file"
-                          ref={upload_ref}
-                          name="upload_profile_pics"
-                          style={{ display: "none" }} // To Hide Input:File
-                          onChange={OnChangeUploadFile}
-                        />
                       </div>
                     </div>
                   </div>
@@ -132,6 +162,13 @@ const DeliverImage = ({
                     type="text"
                     id="project_url"
                     name="project_url"
+                    value={deliveries["project_url"]}
+                    onChange={(e: any) => {
+                      setDeliveries({
+                        ...deliveries,
+                        project_url: e.target.value,
+                      });
+                    }}
                     placeholder="Link to the work"
                     className="w-full bg-white rounded-md min-h-12 mt-1.5 p-2 text-black"
                   />
@@ -143,7 +180,7 @@ const DeliverImage = ({
               className="w-full min-h-12 bg-primary rounded-md mt-6"
               onClick={HandleDelivery}
             >
-              Deliver Image
+              {loading ? <Loader /> : "Deliver Image"}
             </button>
           </div>
         </div>
